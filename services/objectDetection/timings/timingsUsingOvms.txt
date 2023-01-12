@@ -1,0 +1,69 @@
+intel@imaging-vm:~/Documents/ai_proxyLatest3/ai_proxy/services/objectDetection$ python3 objectDetection.py --serving_mounted_modelDir $(pwd)/model/ --remote_port 50059 --interface ovms
+2021-02-08 15:52:46.851991: W tensorflow/stream_executor/platform/default/dso_loader.cc:60] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2021-02-08 15:52:46.852025: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+Checking Model Status
+State AVAILABLE
+Error code:  0
+Error message:  
+Model version 1 loaded successfully
+objectDetection.py:39: DeprecationWarning: The binary mode of fromstring is deprecated, as it behaves surprisingly on unicode inputs. Use frombuffer instead
+  data = np.fromstring(request.data, dtype=np.uint8)
+Predict time in ms:  20.525000000000002
+time in ms run_detection: 34.910999999999994 getInferResult: 40.467000000000006
+Predict time in ms:  17.284999999999997
+time in ms run_detection: 23.637999999999998 getInferResult: 29.674
+Predict time in ms:  25.745
+time in ms run_detection: 33.165 getInferResult: 39.699999999999996
+Predict time in ms:  19.024
+time in ms run_detection: 28.055 getInferResult: 36.083999999999996
+Predict time in ms:  16.625
+time in ms run_detection: 25.555999999999997 getInferResult: 32.635999999999996
+Predict time in ms:  18.533
+time in ms run_detection: 24.677 getInferResult: 30.647000000000002
+Predict time in ms:  24.117
+time in ms run_detection: 30.923 getInferResult: 43.272999999999996
+Predict time in ms:  30.152
+time in ms run_detection: 38.547 getInferResult: 45.758
+Predict time in ms:  26.166999999999998
+time in ms run_detection: 36.488 getInferResult: 46.97
+Predict time in ms:  21.41
+time in ms run_detection: 28.957 getInferResult: 35.836
+Predict time in ms:  16.535999999999998
+time in ms run_detection: 22.998 getInferResult: 30.547
+Predict time in ms:  28.032999999999998
+time in ms run_detection: 37.489000000000004 getInferResult: 49.251000000000005
+Predict time in ms:  19.968
+time in ms run_detection: 30.628 getInferResult: 37.841
+Predict time in ms:  17.554
+time in ms run_detection: 25.822000000000003 getInferResult: 33.466
+Predict time in ms:  30.083
+time in ms run_detection: 37.923 getInferResult: 49.31
+Predict time in ms:  28.577
+time in ms run_detection: 36.249 getInferResult: 47.137
+Predict time in ms:  18.621
+time in ms run_detection: 24.602 getInferResult: 32.65
+Predict time in ms:  22.594
+time in ms run_detection: 28.125 getInferResult: 35.265
+Predict time in ms:  20.322
+time in ms run_detection: 27.504 getInferResult: 34.876
+Predict time in ms:  17.277
+time in ms run_detection: 22.865 getInferResult: 35.222
+Predict time in ms:  19.074
+time in ms run_detection: 24.736 getInferResult: 35.804
+Predict time in ms:  18.613999999999997
+time in ms run_detection: 24.564 getInferResult: 30.57
+Predict time in ms:  21.606
+time in ms run_detection: 28.454 getInferResult: 36.309
+Predict time in ms:  27.814999999999998
+time in ms run_detection: 36.487 getInferResult: 49.232
+Predict time in ms:  17.52
+time in ms run_detection: 24.897 getInferResult: 32.809
+Predict time in ms:  32.512
+time in ms run_detection: 41.12 getInferResult: 52.888999999999996
+Predict time in ms:  25.582
+time in ms run_detection: 31.981 getInferResult: 40.314
+Predict time in ms:  18.863
+time in ms run_detection: 24.442999999999998 getInferResult: 32.32
+Predict time in ms:  23.754
+time in ms run_detection: 30.469 getInferResult: 37.812
+

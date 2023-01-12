@@ -1,0 +1,2925 @@
+<?xml version="1.0"?>
+<net name="Function_0" version="6" batch="1">
+	<layers>
+		<layer name="Parameter_0" type="Input" precision="FP32" id="0">
+			<data originalLayersNames="Parameter_0" />
+			<output>
+				<port id="0" precision="FP32">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>300</dim>
+					<dim>300</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_4" type="Convolution" precision="FP32" id="1">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" originalLayersNames="Add_4,Convolution_2" output="32" pads_begin="0,0" pads_end="1,1" strides="2,2" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>300</dim>
+					<dim>300</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>150</dim>
+					<dim>150</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="0" size="128" precision="FP32" />
+				<weights offset="128" size="3456" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_5" type="Clamp" precision="FP32" id="2">
+			<data max="6" min="0" originalLayersNames="Clamp_5" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>150</dim>
+					<dim>150</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>150</dim>
+					<dim>150</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_17" type="Convolution" precision="FP32" id="3">
+			<data auto_pad="same_upper" dilations="1,1" group="32" kernel="3,3" originalLayersNames="Add_17,GroupConvolution_15" output="32" pads_begin="1,1" pads_end="1,1" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>150</dim>
+					<dim>150</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>150</dim>
+					<dim>150</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="3584" size="128" precision="FP32" />
+				<weights offset="3712" size="1152" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_18" type="Clamp" precision="FP32" id="4">
+			<data max="6" min="0" originalLayersNames="Clamp_18" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>150</dim>
+					<dim>150</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>150</dim>
+					<dim>150</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_28" type="Convolution" precision="FP32" id="5">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_28,Convolution_26" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>32</dim>
+					<dim>150</dim>
+					<dim>150</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>150</dim>
+					<dim>150</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="4864" size="256" precision="FP32" />
+				<weights offset="5120" size="8192" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_29" type="Clamp" precision="FP32" id="6">
+			<data max="6" min="0" originalLayersNames="Clamp_29" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>150</dim>
+					<dim>150</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>150</dim>
+					<dim>150</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_41" type="Convolution" precision="FP32" id="7">
+			<data auto_pad="same_upper" dilations="1,1" group="64" kernel="3,3" originalLayersNames="Add_41,GroupConvolution_39" output="64" pads_begin="0,0" pads_end="1,1" strides="2,2" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>150</dim>
+					<dim>150</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="13312" size="256" precision="FP32" />
+				<weights offset="13568" size="2304" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_42" type="Clamp" precision="FP32" id="8">
+			<data max="6" min="0" originalLayersNames="Clamp_42" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_52" type="Convolution" precision="FP32" id="9">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_52,Convolution_50" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="15872" size="512" precision="FP32" />
+				<weights offset="16384" size="32768" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_53" type="Clamp" precision="FP32" id="10">
+			<data max="6" min="0" originalLayersNames="Clamp_53" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_65" type="Convolution" precision="FP32" id="11">
+			<data auto_pad="same_upper" dilations="1,1" group="128" kernel="3,3" originalLayersNames="Add_65,GroupConvolution_63" output="128" pads_begin="1,1" pads_end="1,1" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="49152" size="512" precision="FP32" />
+				<weights offset="49664" size="4608" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_66" type="Clamp" precision="FP32" id="12">
+			<data max="6" min="0" originalLayersNames="Clamp_66" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_76" type="Convolution" precision="FP32" id="13">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_76,Convolution_74" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="54272" size="512" precision="FP32" />
+				<weights offset="54784" size="65536" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_77" type="Clamp" precision="FP32" id="14">
+			<data max="6" min="0" originalLayersNames="Clamp_77" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_89" type="Convolution" precision="FP32" id="15">
+			<data auto_pad="same_upper" dilations="1,1" group="128" kernel="3,3" originalLayersNames="Add_89,GroupConvolution_87" output="128" pads_begin="1,1" pads_end="1,1" strides="2,2" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>75</dim>
+					<dim>75</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="120320" size="512" precision="FP32" />
+				<weights offset="120832" size="4608" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_90" type="Clamp" precision="FP32" id="16">
+			<data max="6" min="0" originalLayersNames="Clamp_90" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_100" type="Convolution" precision="FP32" id="17">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_100,Convolution_98" output="256" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="125440" size="1024" precision="FP32" />
+				<weights offset="126464" size="131072" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_101" type="Clamp" precision="FP32" id="18">
+			<data max="6" min="0" originalLayersNames="Clamp_101" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_113" type="Convolution" precision="FP32" id="19">
+			<data auto_pad="same_upper" dilations="1,1" group="256" kernel="3,3" originalLayersNames="Add_113,GroupConvolution_111" output="256" pads_begin="1,1" pads_end="1,1" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="257536" size="1024" precision="FP32" />
+				<weights offset="258560" size="9216" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_114" type="Clamp" precision="FP32" id="20">
+			<data max="6" min="0" originalLayersNames="Clamp_114" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_124" type="Convolution" precision="FP32" id="21">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_124,Convolution_122" output="256" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="267776" size="1024" precision="FP32" />
+				<weights offset="268800" size="262144" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_125" type="Clamp" precision="FP32" id="22">
+			<data max="6" min="0" originalLayersNames="Clamp_125" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_137" type="Convolution" precision="FP32" id="23">
+			<data auto_pad="same_upper" dilations="1,1" group="256" kernel="3,3" originalLayersNames="Add_137,GroupConvolution_135" output="256" pads_begin="0,0" pads_end="1,1" strides="2,2" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>38</dim>
+					<dim>38</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="530944" size="1024" precision="FP32" />
+				<weights offset="531968" size="9216" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_138" type="Clamp" precision="FP32" id="24">
+			<data max="6" min="0" originalLayersNames="Clamp_138" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_148" type="Convolution" precision="FP32" id="25">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_148,Convolution_146" output="512" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="541184" size="2048" precision="FP32" />
+				<weights offset="543232" size="524288" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_149" type="Clamp" precision="FP32" id="26">
+			<data max="6" min="0" originalLayersNames="Clamp_149" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_161" type="Convolution" precision="FP32" id="27">
+			<data auto_pad="same_upper" dilations="1,1" group="512" kernel="3,3" originalLayersNames="Add_161,GroupConvolution_159" output="512" pads_begin="1,1" pads_end="1,1" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="1067520" size="2048" precision="FP32" />
+				<weights offset="1069568" size="18432" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_162" type="Clamp" precision="FP32" id="28">
+			<data max="6" min="0" originalLayersNames="Clamp_162" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_172" type="Convolution" precision="FP32" id="29">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_172,Convolution_170" output="512" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="1088000" size="2048" precision="FP32" />
+				<weights offset="1090048" size="1048576" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_173" type="Clamp" precision="FP32" id="30">
+			<data max="6" min="0" originalLayersNames="Clamp_173" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_185" type="Convolution" precision="FP32" id="31">
+			<data auto_pad="same_upper" dilations="1,1" group="512" kernel="3,3" originalLayersNames="Add_185,GroupConvolution_183" output="512" pads_begin="1,1" pads_end="1,1" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="2138624" size="2048" precision="FP32" />
+				<weights offset="2140672" size="18432" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_186" type="Clamp" precision="FP32" id="32">
+			<data max="6" min="0" originalLayersNames="Clamp_186" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_196" type="Convolution" precision="FP32" id="33">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_196,Convolution_194" output="512" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="2159104" size="2048" precision="FP32" />
+				<weights offset="2161152" size="1048576" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_197" type="Clamp" precision="FP32" id="34">
+			<data max="6" min="0" originalLayersNames="Clamp_197" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_209" type="Convolution" precision="FP32" id="35">
+			<data auto_pad="same_upper" dilations="1,1" group="512" kernel="3,3" originalLayersNames="Add_209,GroupConvolution_207" output="512" pads_begin="1,1" pads_end="1,1" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="3209728" size="2048" precision="FP32" />
+				<weights offset="3211776" size="18432" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_210" type="Clamp" precision="FP32" id="36">
+			<data max="6" min="0" originalLayersNames="Clamp_210" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_220" type="Convolution" precision="FP32" id="37">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_220,Convolution_218" output="512" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="3230208" size="2048" precision="FP32" />
+				<weights offset="3232256" size="1048576" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_221" type="Clamp" precision="FP32" id="38">
+			<data max="6" min="0" originalLayersNames="Clamp_221" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_233" type="Convolution" precision="FP32" id="39">
+			<data auto_pad="same_upper" dilations="1,1" group="512" kernel="3,3" originalLayersNames="Add_233,GroupConvolution_231" output="512" pads_begin="1,1" pads_end="1,1" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="4280832" size="2048" precision="FP32" />
+				<weights offset="4282880" size="18432" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_234" type="Clamp" precision="FP32" id="40">
+			<data max="6" min="0" originalLayersNames="Clamp_234" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_244" type="Convolution" precision="FP32" id="41">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_244,Convolution_242" output="512" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="4301312" size="2048" precision="FP32" />
+				<weights offset="4303360" size="1048576" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_245" type="Clamp" precision="FP32" id="42">
+			<data max="6" min="0" originalLayersNames="Clamp_245" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_257" type="Convolution" precision="FP32" id="43">
+			<data auto_pad="same_upper" dilations="1,1" group="512" kernel="3,3" originalLayersNames="Add_257,GroupConvolution_255" output="512" pads_begin="1,1" pads_end="1,1" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="5351936" size="2048" precision="FP32" />
+				<weights offset="5353984" size="18432" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_258" type="Clamp" precision="FP32" id="44">
+			<data max="6" min="0" originalLayersNames="Clamp_258" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_268" type="Convolution" precision="FP32" id="45">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_268,Convolution_266" output="512" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="5372416" size="2048" precision="FP32" />
+				<weights offset="5374464" size="1048576" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_269" type="Clamp" precision="FP32" id="46">
+			<data max="6" min="0" originalLayersNames="Clamp_269" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_279" type="Convolution" precision="FP32" id="47">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_279,Convolution_277" output="273" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>273</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="6423040" size="1092" precision="FP32" />
+				<weights offset="6424132" size="559104" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Transpose_281" type="Permute" precision="FP32" id="48">
+			<data order="0,2,3,1" originalLayersNames="Transpose_281" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>273</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+					<dim>273</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Constant_282" type="Const" precision="I64" id="49">
+			<data originalLayersNames="Constant_282" />
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="6983236" size="32" precision="I64" />
+			</blobs>
+		</layer>
+		<layer name="Reshape_283" type="Reshape" precision="FP32" id="50">
+			<data dim="" originalLayersNames="Reshape_283" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+					<dim>273</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1083</dim>
+					<dim>91</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Transpose_285" type="Permute" precision="FP32" id="51">
+			<data order="0,3,1,2" originalLayersNames="Transpose_285" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1083</dim>
+					<dim>91</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>91</dim>
+					<dim>1</dim>
+					<dim>1083</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_301" type="Convolution" precision="FP32" id="52">
+			<data auto_pad="same_upper" dilations="1,1" group="512" kernel="3,3" originalLayersNames="Add_301,GroupConvolution_299" output="512" pads_begin="1,1" pads_end="1,1" strides="2,2" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="6983268" size="2048" precision="FP32" />
+				<weights offset="6985316" size="18432" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_302" type="Clamp" precision="FP32" id="53">
+			<data max="6" min="0" originalLayersNames="Clamp_302" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_312" type="Convolution" precision="FP32" id="54">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_312,Convolution_310" output="1024" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="7003748" size="4096" precision="FP32" />
+				<weights offset="7007844" size="2097152" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_313" type="Clamp" precision="FP32" id="55">
+			<data max="6" min="0" originalLayersNames="Clamp_313" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_325" type="Convolution" precision="FP32" id="56">
+			<data auto_pad="same_upper" dilations="1,1" group="1024" kernel="3,3" originalLayersNames="Add_325,GroupConvolution_323" output="1024" pads_begin="1,1" pads_end="1,1" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="9104996" size="4096" precision="FP32" />
+				<weights offset="9109092" size="36864" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_326" type="Clamp" precision="FP32" id="57">
+			<data max="6" min="0" originalLayersNames="Clamp_326" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_336" type="Convolution" precision="FP32" id="58">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_336,Convolution_334" output="1024" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="9145956" size="4096" precision="FP32" />
+				<weights offset="9150052" size="4194304" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_337" type="Clamp" precision="FP32" id="59">
+			<data max="6" min="0" originalLayersNames="Clamp_337" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_347" type="Convolution" precision="FP32" id="60">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_347,Convolution_345" output="546" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>546</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="13344356" size="2184" precision="FP32" />
+				<weights offset="13346540" size="2236416" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Transpose_349" type="Permute" precision="FP32" id="61">
+			<data order="0,2,3,1" originalLayersNames="Transpose_349" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>546</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+					<dim>546</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Constant_350" type="Const" precision="I64" id="62">
+			<data originalLayersNames="Constant_350" />
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="15582956" size="32" precision="I64" />
+			</blobs>
+		</layer>
+		<layer name="Reshape_351" type="Reshape" precision="FP32" id="63">
+			<data dim="" originalLayersNames="Reshape_351" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+					<dim>546</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>600</dim>
+					<dim>91</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Transpose_353" type="Permute" precision="FP32" id="64">
+			<data order="0,3,1,2" originalLayersNames="Transpose_353" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>600</dim>
+					<dim>91</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>91</dim>
+					<dim>1</dim>
+					<dim>600</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_367" type="Convolution" precision="FP32" id="65">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_367,Convolution_365" output="256" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="15582988" size="1024" precision="FP32" />
+				<weights offset="15584012" size="1048576" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_368" type="Clamp" precision="FP32" id="66">
+			<data max="6" min="0" originalLayersNames="Clamp_368" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_378" type="Convolution" precision="FP32" id="67">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" originalLayersNames="Add_378,Convolution_376" output="512" pads_begin="0,0" pads_end="1,1" strides="2,2" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="16632588" size="2048" precision="FP32" />
+				<weights offset="16634636" size="4718592" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_379" type="Clamp" precision="FP32" id="68">
+			<data max="6" min="0" originalLayersNames="Clamp_379" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_389" type="Convolution" precision="FP32" id="69">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_389,Convolution_387" output="546" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>546</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="21353228" size="2184" precision="FP32" />
+				<weights offset="21355412" size="1118208" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Transpose_391" type="Permute" precision="FP32" id="70">
+			<data order="0,2,3,1" originalLayersNames="Transpose_391" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>546</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+					<dim>546</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Constant_392" type="Const" precision="I64" id="71">
+			<data originalLayersNames="Constant_392" />
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="22473620" size="32" precision="I64" />
+			</blobs>
+		</layer>
+		<layer name="Reshape_393" type="Reshape" precision="FP32" id="72">
+			<data dim="" originalLayersNames="Reshape_393" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+					<dim>546</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>150</dim>
+					<dim>91</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Transpose_395" type="Permute" precision="FP32" id="73">
+			<data order="0,3,1,2" originalLayersNames="Transpose_395" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>150</dim>
+					<dim>91</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>91</dim>
+					<dim>1</dim>
+					<dim>150</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_409" type="Convolution" precision="FP32" id="74">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_409,Convolution_407" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="22473652" size="512" precision="FP32" />
+				<weights offset="22474164" size="262144" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_410" type="Clamp" precision="FP32" id="75">
+			<data max="6" min="0" originalLayersNames="Clamp_410" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_420" type="Convolution" precision="FP32" id="76">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" originalLayersNames="Add_420,Convolution_418" output="256" pads_begin="1,1" pads_end="1,1" strides="2,2" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="22736308" size="1024" precision="FP32" />
+				<weights offset="22737332" size="1179648" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_421" type="Clamp" precision="FP32" id="77">
+			<data max="6" min="0" originalLayersNames="Clamp_421" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_431" type="Convolution" precision="FP32" id="78">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_431,Convolution_429" output="546" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>546</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="23916980" size="2184" precision="FP32" />
+				<weights offset="23919164" size="559104" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Transpose_433" type="Permute" precision="FP32" id="79">
+			<data order="0,2,3,1" originalLayersNames="Transpose_433" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>546</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+					<dim>546</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Constant_434" type="Const" precision="I64" id="80">
+			<data originalLayersNames="Constant_434" />
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="24478268" size="32" precision="I64" />
+			</blobs>
+		</layer>
+		<layer name="Reshape_435" type="Reshape" precision="FP32" id="81">
+			<data dim="" originalLayersNames="Reshape_435" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+					<dim>546</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>54</dim>
+					<dim>91</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Transpose_437" type="Permute" precision="FP32" id="82">
+			<data order="0,3,1,2" originalLayersNames="Transpose_437" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>54</dim>
+					<dim>91</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>91</dim>
+					<dim>1</dim>
+					<dim>54</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_451" type="Convolution" precision="FP32" id="83">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_451,Convolution_449" output="128" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="24478300" size="512" precision="FP32" />
+				<weights offset="24478812" size="131072" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_452" type="Clamp" precision="FP32" id="84">
+			<data max="6" min="0" originalLayersNames="Clamp_452" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_462" type="Convolution" precision="FP32" id="85">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" originalLayersNames="Add_462,Convolution_460" output="256" pads_begin="1,1" pads_end="1,1" strides="2,2" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="24609884" size="1024" precision="FP32" />
+				<weights offset="24610908" size="1179648" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_463" type="Clamp" precision="FP32" id="86">
+			<data max="6" min="0" originalLayersNames="Clamp_463" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_473" type="Convolution" precision="FP32" id="87">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_473,Convolution_471" output="546" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>546</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="25790556" size="2184" precision="FP32" />
+				<weights offset="25792740" size="559104" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Transpose_475" type="Permute" precision="FP32" id="88">
+			<data order="0,2,3,1" originalLayersNames="Transpose_475" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>546</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+					<dim>546</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Constant_476" type="Const" precision="I64" id="89">
+			<data originalLayersNames="Constant_476" />
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="26351844" size="32" precision="I64" />
+			</blobs>
+		</layer>
+		<layer name="Reshape_477" type="Reshape" precision="FP32" id="90">
+			<data dim="" originalLayersNames="Reshape_477" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+					<dim>546</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>91</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Transpose_479" type="Permute" precision="FP32" id="91">
+			<data order="0,3,1,2" originalLayersNames="Transpose_479" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>91</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>91</dim>
+					<dim>1</dim>
+					<dim>24</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_493" type="Convolution" precision="FP32" id="92">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_493,Convolution_491" output="64" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="26351876" size="256" precision="FP32" />
+				<weights offset="26352132" size="65536" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_494" type="Clamp" precision="FP32" id="93">
+			<data max="6" min="0" originalLayersNames="Clamp_494" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_504" type="Convolution" precision="FP32" id="94">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="3,3" originalLayersNames="Add_504,Convolution_502" output="128" pads_begin="0,0" pads_end="1,1" strides="2,2" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="26417668" size="512" precision="FP32" />
+				<weights offset="26418180" size="294912" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Clamp_505" type="Clamp" precision="FP32" id="95">
+			<data max="6" min="0" originalLayersNames="Clamp_505" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_515" type="Convolution" precision="FP32" id="96">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_515,Convolution_513" output="546" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>546</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="26713092" size="2184" precision="FP32" />
+				<weights offset="26715276" size="279552" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Constant_5652" type="Const" precision="I64" id="97">
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="26994828" size="32" precision="I64" />
+			</blobs>
+		</layer>
+		<layer name="Transpose_517" type="Reshape" precision="FP32" id="98">
+			<data dim="" originalLayersNames="Transpose_517" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>546</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>546</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Constant_518" type="Const" precision="I64" id="99">
+			<data originalLayersNames="Constant_518" />
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="26994860" size="32" precision="I64" />
+			</blobs>
+		</layer>
+		<layer name="Reshape_519" type="Reshape" precision="FP32" id="100">
+			<data dim="" originalLayersNames="Reshape_519" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>546</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>6</dim>
+					<dim>91</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Transpose_521" type="Permute" precision="FP32" id="101">
+			<data order="0,3,1,2" originalLayersNames="Transpose_521" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>6</dim>
+					<dim>91</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>91</dim>
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Concat_522" type="Concat" precision="FP32" id="102">
+			<data axis="3" originalLayersNames="Concat_522" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>91</dim>
+					<dim>1</dim>
+					<dim>1083</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>91</dim>
+					<dim>1</dim>
+					<dim>600</dim>
+				</port>
+				<port id="2">
+					<dim>1</dim>
+					<dim>91</dim>
+					<dim>1</dim>
+					<dim>150</dim>
+				</port>
+				<port id="3">
+					<dim>1</dim>
+					<dim>91</dim>
+					<dim>1</dim>
+					<dim>54</dim>
+				</port>
+				<port id="4">
+					<dim>1</dim>
+					<dim>91</dim>
+					<dim>1</dim>
+					<dim>24</dim>
+				</port>
+				<port id="5">
+					<dim>1</dim>
+					<dim>91</dim>
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</input>
+			<output>
+				<port id="6" precision="FP32">
+					<dim>1</dim>
+					<dim>91</dim>
+					<dim>1</dim>
+					<dim>1917</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Transpose_537" type="Permute" precision="FP32" id="103">
+			<data order="0,2,3,1" originalLayersNames="Transpose_537" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>91</dim>
+					<dim>1</dim>
+					<dim>1917</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1917</dim>
+					<dim>91</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_289" type="Convolution" precision="FP32" id="104">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_289,Convolution_287" output="12" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>12</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="26994892" size="48" precision="FP32" />
+				<weights offset="26994940" size="24576" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Transpose_291" type="Permute" precision="FP32" id="105">
+			<data order="0,2,3,1" originalLayersNames="Transpose_291" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>12</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+					<dim>12</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Constant_292" type="Const" precision="I64" id="106">
+			<data originalLayersNames="Constant_292" />
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="27019516" size="32" precision="I64" />
+			</blobs>
+		</layer>
+		<layer name="Reshape_293" type="Reshape" precision="FP32" id="107">
+			<data dim="" originalLayersNames="Reshape_293" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>19</dim>
+					<dim>19</dim>
+					<dim>12</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1083</dim>
+					<dim>4</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Transpose_295" type="Permute" precision="FP32" id="108">
+			<data order="0,3,1,2" originalLayersNames="Transpose_295" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1083</dim>
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>4</dim>
+					<dim>1</dim>
+					<dim>1083</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_357" type="Convolution" precision="FP32" id="109">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_357,Convolution_355" output="24" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1024</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="27019548" size="96" precision="FP32" />
+				<weights offset="27019644" size="98304" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Transpose_359" type="Permute" precision="FP32" id="110">
+			<data order="0,2,3,1" originalLayersNames="Transpose_359" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+					<dim>24</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Constant_360" type="Const" precision="I64" id="111">
+			<data originalLayersNames="Constant_360" />
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="27117948" size="32" precision="I64" />
+			</blobs>
+		</layer>
+		<layer name="Reshape_361" type="Reshape" precision="FP32" id="112">
+			<data dim="" originalLayersNames="Reshape_361" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>10</dim>
+					<dim>10</dim>
+					<dim>24</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>600</dim>
+					<dim>4</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Transpose_363" type="Permute" precision="FP32" id="113">
+			<data order="0,3,1,2" originalLayersNames="Transpose_363" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>600</dim>
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>4</dim>
+					<dim>1</dim>
+					<dim>600</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_399" type="Convolution" precision="FP32" id="114">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_399,Convolution_397" output="24" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>512</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="27117980" size="96" precision="FP32" />
+				<weights offset="27118076" size="49152" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Transpose_401" type="Permute" precision="FP32" id="115">
+			<data order="0,2,3,1" originalLayersNames="Transpose_401" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+					<dim>24</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Constant_402" type="Const" precision="I64" id="116">
+			<data originalLayersNames="Constant_402" />
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="27167228" size="32" precision="I64" />
+			</blobs>
+		</layer>
+		<layer name="Reshape_403" type="Reshape" precision="FP32" id="117">
+			<data dim="" originalLayersNames="Reshape_403" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>5</dim>
+					<dim>5</dim>
+					<dim>24</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>150</dim>
+					<dim>4</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Transpose_405" type="Permute" precision="FP32" id="118">
+			<data order="0,3,1,2" originalLayersNames="Transpose_405" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>150</dim>
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>4</dim>
+					<dim>1</dim>
+					<dim>150</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_441" type="Convolution" precision="FP32" id="119">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_441,Convolution_439" output="24" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="27167260" size="96" precision="FP32" />
+				<weights offset="27167356" size="24576" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Transpose_443" type="Permute" precision="FP32" id="120">
+			<data order="0,2,3,1" originalLayersNames="Transpose_443" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+					<dim>24</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Constant_444" type="Const" precision="I64" id="121">
+			<data originalLayersNames="Constant_444" />
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="27191932" size="32" precision="I64" />
+			</blobs>
+		</layer>
+		<layer name="Reshape_445" type="Reshape" precision="FP32" id="122">
+			<data dim="" originalLayersNames="Reshape_445" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+					<dim>24</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>54</dim>
+					<dim>4</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Transpose_447" type="Permute" precision="FP32" id="123">
+			<data order="0,3,1,2" originalLayersNames="Transpose_447" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>54</dim>
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>4</dim>
+					<dim>1</dim>
+					<dim>54</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_483" type="Convolution" precision="FP32" id="124">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_483,Convolution_481" output="24" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>256</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="27191964" size="96" precision="FP32" />
+				<weights offset="27192060" size="24576" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Transpose_485" type="Permute" precision="FP32" id="125">
+			<data order="0,2,3,1" originalLayersNames="Transpose_485" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+					<dim>24</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Constant_486" type="Const" precision="I64" id="126">
+			<data originalLayersNames="Constant_486" />
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="27216636" size="32" precision="I64" />
+			</blobs>
+		</layer>
+		<layer name="Reshape_487" type="Reshape" precision="FP32" id="127">
+			<data dim="" originalLayersNames="Reshape_487" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>2</dim>
+					<dim>2</dim>
+					<dim>24</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>4</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Transpose_489" type="Permute" precision="FP32" id="128">
+			<data order="0,3,1,2" originalLayersNames="Transpose_489" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>4</dim>
+					<dim>1</dim>
+					<dim>24</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Add_526" type="Convolution" precision="FP32" id="129">
+			<data auto_pad="same_upper" dilations="1,1" group="1" kernel="1,1" originalLayersNames="Add_526,Convolution_524" output="24" pads_begin="0,0" pads_end="0,0" strides="1,1" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>128</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+			<blobs>
+				<biases offset="27216668" size="96" precision="FP32" />
+				<weights offset="27216764" size="12288" precision="FP32" />
+			</blobs>
+		</layer>
+		<layer name="Constant_5659" type="Const" precision="I64" id="130">
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="27229052" size="32" precision="I64" />
+			</blobs>
+		</layer>
+		<layer name="Transpose_528" type="Reshape" precision="FP32" id="131">
+			<data dim="" originalLayersNames="Transpose_528" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>24</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Constant_529" type="Const" precision="I64" id="132">
+			<data originalLayersNames="Constant_529" />
+			<output>
+				<port id="0" precision="I64">
+					<dim>4</dim>
+				</port>
+			</output>
+			<blobs>
+				<custom offset="27229084" size="32" precision="I64" />
+			</blobs>
+		</layer>
+		<layer name="Reshape_530" type="Reshape" precision="FP32" id="133">
+			<data dim="" originalLayersNames="Reshape_530" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>24</dim>
+				</port>
+				<port id="1">
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>6</dim>
+					<dim>4</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Transpose_532" type="Permute" precision="FP32" id="134">
+			<data order="0,3,1,2" originalLayersNames="Transpose_532" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>6</dim>
+					<dim>4</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>4</dim>
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Concat_533" type="Concat" precision="FP32" id="135">
+			<data axis="3" originalLayersNames="Concat_533" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>4</dim>
+					<dim>1</dim>
+					<dim>1083</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>4</dim>
+					<dim>1</dim>
+					<dim>600</dim>
+				</port>
+				<port id="2">
+					<dim>1</dim>
+					<dim>4</dim>
+					<dim>1</dim>
+					<dim>150</dim>
+				</port>
+				<port id="3">
+					<dim>1</dim>
+					<dim>4</dim>
+					<dim>1</dim>
+					<dim>54</dim>
+				</port>
+				<port id="4">
+					<dim>1</dim>
+					<dim>4</dim>
+					<dim>1</dim>
+					<dim>24</dim>
+				</port>
+				<port id="5">
+					<dim>1</dim>
+					<dim>4</dim>
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</input>
+			<output>
+				<port id="6" precision="FP32">
+					<dim>1</dim>
+					<dim>4</dim>
+					<dim>1</dim>
+					<dim>1917</dim>
+				</port>
+			</output>
+		</layer>
+		<layer name="Transpose_535" type="Permute" precision="FP32" id="136">
+			<data order="0,2,3,1" originalLayersNames="Transpose_535" />
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>4</dim>
+					<dim>1</dim>
+					<dim>1917</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1917</dim>
+					<dim>4</dim>
+				</port>
+			</output>
+		</layer>
+	</layers>
+	<edges>
+		<edge from-layer="0" from-port="0" to-layer="1" to-port="0" />
+		<edge from-layer="1" from-port="1" to-layer="2" to-port="0" />
+		<edge from-layer="2" from-port="1" to-layer="3" to-port="0" />
+		<edge from-layer="3" from-port="1" to-layer="4" to-port="0" />
+		<edge from-layer="4" from-port="1" to-layer="5" to-port="0" />
+		<edge from-layer="5" from-port="1" to-layer="6" to-port="0" />
+		<edge from-layer="6" from-port="1" to-layer="7" to-port="0" />
+		<edge from-layer="7" from-port="1" to-layer="8" to-port="0" />
+		<edge from-layer="8" from-port="1" to-layer="9" to-port="0" />
+		<edge from-layer="9" from-port="1" to-layer="10" to-port="0" />
+		<edge from-layer="10" from-port="1" to-layer="11" to-port="0" />
+		<edge from-layer="11" from-port="1" to-layer="12" to-port="0" />
+		<edge from-layer="12" from-port="1" to-layer="13" to-port="0" />
+		<edge from-layer="13" from-port="1" to-layer="14" to-port="0" />
+		<edge from-layer="14" from-port="1" to-layer="15" to-port="0" />
+		<edge from-layer="15" from-port="1" to-layer="16" to-port="0" />
+		<edge from-layer="16" from-port="1" to-layer="17" to-port="0" />
+		<edge from-layer="17" from-port="1" to-layer="18" to-port="0" />
+		<edge from-layer="18" from-port="1" to-layer="19" to-port="0" />
+		<edge from-layer="19" from-port="1" to-layer="20" to-port="0" />
+		<edge from-layer="20" from-port="1" to-layer="21" to-port="0" />
+		<edge from-layer="21" from-port="1" to-layer="22" to-port="0" />
+		<edge from-layer="22" from-port="1" to-layer="23" to-port="0" />
+		<edge from-layer="23" from-port="1" to-layer="24" to-port="0" />
+		<edge from-layer="24" from-port="1" to-layer="25" to-port="0" />
+		<edge from-layer="25" from-port="1" to-layer="26" to-port="0" />
+		<edge from-layer="26" from-port="1" to-layer="27" to-port="0" />
+		<edge from-layer="27" from-port="1" to-layer="28" to-port="0" />
+		<edge from-layer="28" from-port="1" to-layer="29" to-port="0" />
+		<edge from-layer="29" from-port="1" to-layer="30" to-port="0" />
+		<edge from-layer="30" from-port="1" to-layer="31" to-port="0" />
+		<edge from-layer="31" from-port="1" to-layer="32" to-port="0" />
+		<edge from-layer="32" from-port="1" to-layer="33" to-port="0" />
+		<edge from-layer="33" from-port="1" to-layer="34" to-port="0" />
+		<edge from-layer="34" from-port="1" to-layer="35" to-port="0" />
+		<edge from-layer="35" from-port="1" to-layer="36" to-port="0" />
+		<edge from-layer="36" from-port="1" to-layer="37" to-port="0" />
+		<edge from-layer="37" from-port="1" to-layer="38" to-port="0" />
+		<edge from-layer="38" from-port="1" to-layer="39" to-port="0" />
+		<edge from-layer="39" from-port="1" to-layer="40" to-port="0" />
+		<edge from-layer="40" from-port="1" to-layer="41" to-port="0" />
+		<edge from-layer="41" from-port="1" to-layer="42" to-port="0" />
+		<edge from-layer="42" from-port="1" to-layer="43" to-port="0" />
+		<edge from-layer="43" from-port="1" to-layer="44" to-port="0" />
+		<edge from-layer="44" from-port="1" to-layer="45" to-port="0" />
+		<edge from-layer="45" from-port="1" to-layer="46" to-port="0" />
+		<edge from-layer="46" from-port="1" to-layer="47" to-port="0" />
+		<edge from-layer="46" from-port="1" to-layer="104" to-port="0" />
+		<edge from-layer="46" from-port="1" to-layer="52" to-port="0" />
+		<edge from-layer="47" from-port="1" to-layer="48" to-port="0" />
+		<edge from-layer="48" from-port="1" to-layer="50" to-port="0" />
+		<edge from-layer="49" from-port="0" to-layer="50" to-port="1" />
+		<edge from-layer="50" from-port="2" to-layer="51" to-port="0" />
+		<edge from-layer="51" from-port="1" to-layer="102" to-port="0" />
+		<edge from-layer="52" from-port="1" to-layer="53" to-port="0" />
+		<edge from-layer="53" from-port="1" to-layer="54" to-port="0" />
+		<edge from-layer="54" from-port="1" to-layer="55" to-port="0" />
+		<edge from-layer="55" from-port="1" to-layer="56" to-port="0" />
+		<edge from-layer="56" from-port="1" to-layer="57" to-port="0" />
+		<edge from-layer="57" from-port="1" to-layer="58" to-port="0" />
+		<edge from-layer="58" from-port="1" to-layer="59" to-port="0" />
+		<edge from-layer="59" from-port="1" to-layer="60" to-port="0" />
+		<edge from-layer="59" from-port="1" to-layer="109" to-port="0" />
+		<edge from-layer="59" from-port="1" to-layer="65" to-port="0" />
+		<edge from-layer="60" from-port="1" to-layer="61" to-port="0" />
+		<edge from-layer="61" from-port="1" to-layer="63" to-port="0" />
+		<edge from-layer="62" from-port="0" to-layer="63" to-port="1" />
+		<edge from-layer="63" from-port="2" to-layer="64" to-port="0" />
+		<edge from-layer="64" from-port="1" to-layer="102" to-port="1" />
+		<edge from-layer="65" from-port="1" to-layer="66" to-port="0" />
+		<edge from-layer="66" from-port="1" to-layer="67" to-port="0" />
+		<edge from-layer="67" from-port="1" to-layer="68" to-port="0" />
+		<edge from-layer="68" from-port="1" to-layer="69" to-port="0" />
+		<edge from-layer="68" from-port="1" to-layer="114" to-port="0" />
+		<edge from-layer="68" from-port="1" to-layer="74" to-port="0" />
+		<edge from-layer="69" from-port="1" to-layer="70" to-port="0" />
+		<edge from-layer="70" from-port="1" to-layer="72" to-port="0" />
+		<edge from-layer="71" from-port="0" to-layer="72" to-port="1" />
+		<edge from-layer="72" from-port="2" to-layer="73" to-port="0" />
+		<edge from-layer="73" from-port="1" to-layer="102" to-port="2" />
+		<edge from-layer="74" from-port="1" to-layer="75" to-port="0" />
+		<edge from-layer="75" from-port="1" to-layer="76" to-port="0" />
+		<edge from-layer="76" from-port="1" to-layer="77" to-port="0" />
+		<edge from-layer="77" from-port="1" to-layer="78" to-port="0" />
+		<edge from-layer="77" from-port="1" to-layer="119" to-port="0" />
+		<edge from-layer="77" from-port="1" to-layer="83" to-port="0" />
+		<edge from-layer="78" from-port="1" to-layer="79" to-port="0" />
+		<edge from-layer="79" from-port="1" to-layer="81" to-port="0" />
+		<edge from-layer="80" from-port="0" to-layer="81" to-port="1" />
+		<edge from-layer="81" from-port="2" to-layer="82" to-port="0" />
+		<edge from-layer="82" from-port="1" to-layer="102" to-port="3" />
+		<edge from-layer="83" from-port="1" to-layer="84" to-port="0" />
+		<edge from-layer="84" from-port="1" to-layer="85" to-port="0" />
+		<edge from-layer="85" from-port="1" to-layer="86" to-port="0" />
+		<edge from-layer="86" from-port="1" to-layer="87" to-port="0" />
+		<edge from-layer="86" from-port="1" to-layer="124" to-port="0" />
+		<edge from-layer="86" from-port="1" to-layer="92" to-port="0" />
+		<edge from-layer="87" from-port="1" to-layer="88" to-port="0" />
+		<edge from-layer="88" from-port="1" to-layer="90" to-port="0" />
+		<edge from-layer="89" from-port="0" to-layer="90" to-port="1" />
+		<edge from-layer="90" from-port="2" to-layer="91" to-port="0" />
+		<edge from-layer="91" from-port="1" to-layer="102" to-port="4" />
+		<edge from-layer="92" from-port="1" to-layer="93" to-port="0" />
+		<edge from-layer="93" from-port="1" to-layer="94" to-port="0" />
+		<edge from-layer="94" from-port="1" to-layer="95" to-port="0" />
+		<edge from-layer="95" from-port="1" to-layer="96" to-port="0" />
+		<edge from-layer="95" from-port="1" to-layer="129" to-port="0" />
+		<edge from-layer="96" from-port="1" to-layer="98" to-port="0" />
+		<edge from-layer="97" from-port="0" to-layer="98" to-port="1" />
+		<edge from-layer="98" from-port="2" to-layer="100" to-port="0" />
+		<edge from-layer="99" from-port="0" to-layer="100" to-port="1" />
+		<edge from-layer="100" from-port="2" to-layer="101" to-port="0" />
+		<edge from-layer="101" from-port="1" to-layer="102" to-port="5" />
+		<edge from-layer="102" from-port="6" to-layer="103" to-port="0" />
+		<edge from-layer="104" from-port="1" to-layer="105" to-port="0" />
+		<edge from-layer="105" from-port="1" to-layer="107" to-port="0" />
+		<edge from-layer="106" from-port="0" to-layer="107" to-port="1" />
+		<edge from-layer="107" from-port="2" to-layer="108" to-port="0" />
+		<edge from-layer="108" from-port="1" to-layer="135" to-port="0" />
+		<edge from-layer="109" from-port="1" to-layer="110" to-port="0" />
+		<edge from-layer="110" from-port="1" to-layer="112" to-port="0" />
+		<edge from-layer="111" from-port="0" to-layer="112" to-port="1" />
+		<edge from-layer="112" from-port="2" to-layer="113" to-port="0" />
+		<edge from-layer="113" from-port="1" to-layer="135" to-port="1" />
+		<edge from-layer="114" from-port="1" to-layer="115" to-port="0" />
+		<edge from-layer="115" from-port="1" to-layer="117" to-port="0" />
+		<edge from-layer="116" from-port="0" to-layer="117" to-port="1" />
+		<edge from-layer="117" from-port="2" to-layer="118" to-port="0" />
+		<edge from-layer="118" from-port="1" to-layer="135" to-port="2" />
+		<edge from-layer="119" from-port="1" to-layer="120" to-port="0" />
+		<edge from-layer="120" from-port="1" to-layer="122" to-port="0" />
+		<edge from-layer="121" from-port="0" to-layer="122" to-port="1" />
+		<edge from-layer="122" from-port="2" to-layer="123" to-port="0" />
+		<edge from-layer="123" from-port="1" to-layer="135" to-port="3" />
+		<edge from-layer="124" from-port="1" to-layer="125" to-port="0" />
+		<edge from-layer="125" from-port="1" to-layer="127" to-port="0" />
+		<edge from-layer="126" from-port="0" to-layer="127" to-port="1" />
+		<edge from-layer="127" from-port="2" to-layer="128" to-port="0" />
+		<edge from-layer="128" from-port="1" to-layer="135" to-port="4" />
+		<edge from-layer="129" from-port="1" to-layer="131" to-port="0" />
+		<edge from-layer="130" from-port="0" to-layer="131" to-port="1" />
+		<edge from-layer="131" from-port="2" to-layer="133" to-port="0" />
+		<edge from-layer="132" from-port="0" to-layer="133" to-port="1" />
+		<edge from-layer="133" from-port="2" to-layer="134" to-port="0" />
+		<edge from-layer="134" from-port="1" to-layer="135" to-port="5" />
+		<edge from-layer="135" from-port="6" to-layer="136" to-port="0" />
+	</edges>
+	<statistics />
+</net>

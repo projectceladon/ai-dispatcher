@@ -1,0 +1,120 @@
+intel@imaging-vm:~/Documents/ai_proxy/services/faceMaskDetection$ python3 faceMaskDetection.py --width 260 --height 260 --serving_mounted_modelDir $(pwd)/model/ --interface ovms
+2021-02-16 14:41:03.933545: W tensorflow/stream_executor/platform/default/dso_loader.cc:60] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2021-02-16 14:41:03.933570: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+Checking Model Status
+State AVAILABLE
+Error code:  0
+Error message:
+Model version 0 loaded successfully
+faceMaskDetection.py:34: DeprecationWarning: The binary mode of fromstring is deprecated, as it behaves surprisingly on unicode inputs. Use frombuffer instead
+  data = np.fromstring(request.data, dtype=np.uint8)
+Predict time in ms:  17.843999999999998
+time in ms run_detection: 39.045 getInferResult: 39.749
+Predict time in ms:  10.212
+time in ms run_detection: 19.516 getInferResult: 20.199
+Predict time in ms:  10.395
+time in ms run_detection: 21.848 getInferResult: 22.861
+Predict time in ms:  16.649
+time in ms run_detection: 26.657 getInferResult: 27.220000000000002
+Predict time in ms:  14.213
+time in ms run_detection: 22.857 getInferResult: 23.357
+Predict time in ms:  13.311
+time in ms run_detection: 22.243 getInferResult: 22.726
+Predict time in ms:  11.312
+time in ms run_detection: 20.355999999999998 getInferResult: 20.847
+Predict time in ms:  13.003
+time in ms run_detection: 21.65 getInferResult: 22.195
+Predict time in ms:  15.423
+time in ms run_detection: 25.838 getInferResult: 26.401999999999997
+Predict time in ms:  13.642
+time in ms run_detection: 21.779 getInferResult: 22.395000000000003
+Predict time in ms:  11.009
+time in ms run_detection: 20.929 getInferResult: 21.41
+Predict time in ms:  12.624
+time in ms run_detection: 21.06 getInferResult: 21.669
+Predict time in ms:  11.399
+time in ms run_detection: 19.516 getInferResult: 20.003
+Predict time in ms:  11.823
+time in ms run_detection: 20.310000000000002 getInferResult: 20.898
+Predict time in ms:  11.091999999999999
+time in ms run_detection: 19.399 getInferResult: 19.874
+Predict time in ms:  11.665
+time in ms run_detection: 21.132 getInferResult: 21.610999999999997
+Predict time in ms:  12.527999999999999
+time in ms run_detection: 21.778 getInferResult: 22.297
+Predict time in ms:  12.905
+time in ms run_detection: 21.419 getInferResult: 21.938
+Predict time in ms:  10.402
+time in ms run_detection: 18.474999999999998 getInferResult: 18.965
+Predict time in ms:  12.769
+time in ms run_detection: 21.188 getInferResult: 21.686
+Predict time in ms:  19.279999999999998
+time in ms run_detection: 27.314 getInferResult: 27.785
+Predict time in ms:  12.834999999999999
+time in ms run_detection: 22.655 getInferResult: 23.11
+Predict time in ms:  10.737
+time in ms run_detection: 21.516000000000002 getInferResult: 22.028
+Predict time in ms:  13.925
+time in ms run_detection: 24.424 getInferResult: 25.157
+Predict time in ms:  13.877
+time in ms run_detection: 23.732 getInferResult: 24.63
+Predict time in ms:  10.038
+time in ms run_detection: 18.289 getInferResult: 18.773000000000003
+Predict time in ms:  13.15
+time in ms run_detection: 22.074 getInferResult: 22.538
+Predict time in ms:  14.982000000000001
+time in ms run_detection: 24.434 getInferResult: 25.811
+Predict time in ms:  9.853000000000002
+time in ms run_detection: 18.191 getInferResult: 18.887
+Predict time in ms:  12.573
+time in ms run_detection: 20.67 getInferResult: 21.166999999999998
+Predict time in ms:  14.23
+time in ms run_detection: 22.393 getInferResult: 23.025
+Predict time in ms:  13.02
+time in ms run_detection: 21.592 getInferResult: 22.073
+Predict time in ms:  10.012
+time in ms run_detection: 18.765 getInferResult: 19.227
+Predict time in ms:  14.312
+time in ms run_detection: 21.735999999999997 getInferResult: 22.241
+Predict time in ms:  10.194999999999999
+time in ms run_detection: 18.43 getInferResult: 18.939
+Predict time in ms:  11.167
+time in ms run_detection: 19.741000000000003 getInferResult: 20.205000000000002
+Predict time in ms:  9.832
+time in ms run_detection: 18.435 getInferResult: 18.922
+Predict time in ms:  10.278
+time in ms run_detection: 18.128999999999998 getInferResult: 18.593
+Predict time in ms:  9.898
+time in ms run_detection: 18.536 getInferResult: 19.004
+Predict time in ms:  14.585
+time in ms run_detection: 22.194 getInferResult: 22.732
+Predict time in ms:  11.596
+time in ms run_detection: 19.724 getInferResult: 20.315
+Predict time in ms:  10.61
+time in ms run_detection: 18.035 getInferResult: 18.515
+Predict time in ms:  12.712
+time in ms run_detection: 20.402 getInferResult: 21.476
+Predict time in ms:  13.722
+time in ms run_detection: 22.58 getInferResult: 23.256
+Predict time in ms:  13.831
+time in ms run_detection: 21.995 getInferResult: 22.534
+Predict time in ms:  12.683
+time in ms run_detection: 21.631 getInferResult: 22.162000000000003
+Predict time in ms:  13.957
+time in ms run_detection: 24.063000000000002 getInferResult: 24.513
+Predict time in ms:  10.638
+time in ms run_detection: 18.952 getInferResult: 19.647000000000002
+Predict time in ms:  12.45
+time in ms run_detection: 23.580000000000002 getInferResult: 24.479999999999997
+Predict time in ms:  12.767000000000001
+time in ms run_detection: 23.668000000000003 getInferResult: 24.587999999999997
+Predict time in ms:  12.082
+time in ms run_detection: 22.356 getInferResult: 23.279999999999998
+Predict time in ms:  14.803
+time in ms run_detection: 25.864 getInferResult: 26.505000000000003
+Predict time in ms:  12.398
+time in ms run_detection: 25.151 getInferResult: 26.022
+Predict time in ms:  11.001999999999999
+time in ms run_detection: 20.326 getInferResult: 21.021
+Predict time in ms:  14.592
+time in ms run_detection: 27.311 getInferResult: 27.779
