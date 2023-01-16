@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+import os
 import argparse
 import logging
 import sys
@@ -71,10 +72,14 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
                                                                             duration))
         return reply_data_tensor
 
-def serve(port):
+def serve(unix_socket, remote_port):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     nnhal_raw_tensor_pb2_grpc.add_DetectionServicer_to_server(Detection(), server)
-    server.add_insecure_port('[::]:{}'.format(port))
+    if(unix_socket != ""):
+        server.add_insecure_port("unix:" + unix_socket)
+        os.chmod(unix_socket, 0o666)
+    else:
+        server.add_insecure_port('[::]:{}'.format(remote_port))
     server.start()
     server.wait_for_termination()
 
@@ -84,6 +89,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Remote Inference from NNHAL')
     parser.add_argument('--remote_port', required=False, default=50051,
                         help='Specify port to grpc service. default: 50051')
+    parser.add_argument('--unix_socket', required=False, default="",
+                        help='Specify path to grpc unix socket.')
     parser.add_argument('--serving_address', required=False, default='localhost',
                         help='Specify url to inference service. default:localhost')
     parser.add_argument('--serving_port', required=False, default=9000,
@@ -103,4 +110,4 @@ if __name__ == '__main__':
     serving_model_name = args['serving_model_name']
     interface = create_interface.createInterfaceObj(adapter, serving_address, serving_port,
                                                     serving_model_name, dir_path)
-    serve(args['remote_port'])
+    serve(args['unix_socket'], args['remote_port'])
