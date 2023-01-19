@@ -30,23 +30,30 @@ import adaptors.create_interface as create_interface
 
 
 class Detection(object_detection_pb2_grpc.DetectionServicer):
+    def __init__(self, interface, remote_port, img_height, img_width):
+        super().__init__()
+        self.remote_port = remote_port
+        self.interface = interface
+        self.img_height = img_height
+        self.img_width = img_width
+
     def getPredictions(self, request, context):
         start_time = datetime.datetime.now()
-        if not interface.isModelLoaded(2000):#Wait upto 2 seconds for model load
+        if not self.interface.isModelLoaded(2000):#Wait upto 2 seconds for model load
             print("Model Load Failure")
             sys.exit(1)
 
-        input_shape = [1, 3, img_width, img_height]
+        input_shape = [1, 3, self.img_width, self.img_height]
         data = np.fromstring(request.data, dtype=np.uint8)
         img = cv2.imdecode(data, cv2.IMREAD_UNCHANGED)
         node_name = "Parameter_0"
-        img = cv2.resize(img, (img_width, img_height))
+        img = cv2.resize(img, (self.img_width, self.img_height))
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img = cv2.normalize(img.astype('float'), None, -1.0, 1.0, cv2.NORM_MINMAX)
 
         #creating dictionary as required by adapters
         input = {node_name: (img, input_shape)}
-        result = interface.run_detection(input)
+        result = self.interface.run_detection(input)
         end_time = datetime.datetime.now()
         serving_duration = (end_time - start_time).total_seconds() * 1000
 
@@ -76,10 +83,10 @@ class Detection(object_detection_pb2_grpc.DetectionServicer):
         return object_detection_pb2.PredictionsList(predictions=detections)
 
 
-def serve(port):
+def serve(detection):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    object_detection_pb2_grpc.add_DetectionServicer_to_server(Detection(), server)
-    server.add_insecure_port('[::]:{}'.format(port))
+    object_detection_pb2_grpc.add_DetectionServicer_to_server(detection, server)
+    server.add_insecure_port('[::]:{}'.format(detection.remote_port))
     server.start()
     server.wait_for_termination()
 
@@ -105,15 +112,12 @@ if __name__ == '__main__':
     parser.add_argument('--height', required=False,
                         help='How the input image width should be resized in pixels',
                         default=300, type=int)
-    global img_height, img_width, interface
     args = vars(parser.parse_args(sys.argv[1:]))
     serving_address = args['serving_address']
     serving_port = args['serving_port']
     dir_path = args['serving_mounted_modelDir']
     serving_model_name=args['serving_model_name']
     adapter = args['interface']
-    img_height = args['height']
-    img_width = args['width']
     interface = create_interface.createInterfaceObj(adapter, serving_address, serving_port,
                                                     serving_model_name, dir_path)
-    serve(args['remote_port'])
+    serve(Detection(interface, args['remote_port'], args['height'], args['width']))

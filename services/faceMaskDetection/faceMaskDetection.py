@@ -31,6 +31,13 @@ from utils.anchor_decode import decode_bbox
 from utils.nms import single_class_non_max_suppression
 
 class Detection(facemask_detection_pb2_grpc.DetectionServicer):
+    def __init__(self, interface, remote_port, img_height, img_width):
+        super().__init__()
+        self.remote_port = remote_port
+        self.interface = interface
+        self.img_height = img_height
+        self.img_width = img_width
+
     def getPredictions(self, request, context):
         #class name -id mapping
         # id2class = {0: 'Mask', 1: 'NoMask'}
@@ -39,7 +46,7 @@ class Detection(facemask_detection_pb2_grpc.DetectionServicer):
         if not interface.isModelLoaded(2000):#Wait upto 2 seconds for model load
             print("Model Load Failure")
             sys.exit(1)
-        input_shape = [1, 3, img_width, img_height]
+        input_shape = [1, 3, self.img_width, self.img_height]
         # anchor configuration
         feature_map_sizes = [[33, 33], [17, 17], [9, 9], [5, 5], [3, 3]]
         anchor_sizes = [[0.04, 0.056], [0.08, 0.11], [0.16, 0.22], [0.32, 0.45], [0.64, 0.72]]
@@ -50,7 +57,7 @@ class Detection(facemask_detection_pb2_grpc.DetectionServicer):
         data = np.fromstring(request.data, dtype=np.uint8)
         img = cv2.imdecode(data, cv2.IMREAD_COLOR)  # BGR color format, shape HWC
         node_name = "data_1"
-        img = cv2.resize(img, (img_width, img_height))
+        img = cv2.resize(img, (self.img_width, self.img_height))
         image = img / 255.0
 
         #creating dictionary as required by adapters
@@ -91,10 +98,10 @@ class Detection(facemask_detection_pb2_grpc.DetectionServicer):
         return facemask_detection_pb2.PredictionsList(predictions=result_coords)
 
 
-def serve(port):
+def serve(detection):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    facemask_detection_pb2_grpc.add_DetectionServicer_to_server(Detection(), server)
-    server.add_insecure_port('[::]:{}'.format(port))
+    facemask_detection_pb2_grpc.add_DetectionServicer_to_server(detection, server)
+    server.add_insecure_port('[::]:{}'.format(detection.remote_port))
     server.start()
     server.wait_for_termination()
 
@@ -121,15 +128,12 @@ if __name__ == '__main__':
                                                     ' resized in pixels', default=1200, type=int)
     parser.add_argument('--height', required=False, help='How the input image width should be'
                                                      ' resized in pixels', default=800, type=int)
-    global img_height, img_width, interface
     args = vars(parser.parse_args(sys.argv[1:]))
     serving_address = args['serving_address']
     serving_port = args['serving_port']
     dir_path = args['serving_mounted_modelDir']
     serving_model_name = args['serving_model_name']
     adapter = args['interface']
-    img_height = args['height']
-    img_width = args['width']
     interface = create_interface.createInterfaceObj(adapter, serving_address, serving_port,
                                                     serving_model_name, dir_path)
-    serve(args['remote_port'])
+    serve(Detection(interface, args['remote_port'], args['height'], args['width']))

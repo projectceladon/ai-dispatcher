@@ -28,22 +28,27 @@ import adaptors.create_interface as create_interface
 
 
 class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
+    def __init__(self, interface, unix_socket, remote_port):
+        super().__init__()
+        self.interface = interface
+        self.unix_socket = unix_socket
+        self.remote_port = remote_port
     def prepare(self, requestStr, context):
-        interface.prepareDir()
+        self.interface.prepareDir()
         return nnhal_raw_tensor_pb2.ReplyStatus(status=True)
 
     def sendXml(self, requestChunks, context):
-        interface.saveXML(requestChunks)
+        self.interface.saveXML(requestChunks)
         return nnhal_raw_tensor_pb2.ReplyStatus(status=True)
 
     def sendBin(self, requestChunks, context):
-        interface.saveBin(requestChunks)
+        self.interface.saveBin(requestChunks)
         return nnhal_raw_tensor_pb2.ReplyStatus(status=True)
 
     def getInferResult(self, request, context):
         start_time = datetime.datetime.now()
         reply_data_tensor = nnhal_raw_tensor_pb2.ReplyDataTensors()
-        if not interface.isModelLoaded(2000):#Wait upto 2 seconds for model load
+        if not self.interface.isModelLoaded(2000):#Wait upto 2 seconds for model load
             print("Model Load Failure")
             return reply_data_tensor
         run_start_time = datetime.datetime.now()
@@ -56,7 +61,7 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
             data = np.frombuffer(img_data, np.dtype('<f')) 
             input[node_name] = (data, input_shape)
 
-        result = interface.run_detection(input)
+        result = self.interface.run_detection(input)
         end_time = datetime.datetime.now()
         serving_duration = (end_time - run_start_time).total_seconds() * 1000
         #Modifed according to the new interface output format
@@ -72,20 +77,19 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
                                                                             duration))
         return reply_data_tensor
 
-def serve(unix_socket, remote_port):
+def serve(detection):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    nnhal_raw_tensor_pb2_grpc.add_DetectionServicer_to_server(Detection(), server)
-    if(unix_socket != ""):
-        server.add_insecure_port("unix:" + unix_socket)
-        os.chmod(unix_socket, 0o666)
+    nnhal_raw_tensor_pb2_grpc.add_DetectionServicer_to_server(detection, server)
+    if(detection.unix_socket != ""):
+        server.add_insecure_port("unix:" + detection.unix_socket)
+        os.chmod(detection.unix_socket, 0o666)
     else:
-        server.add_insecure_port('[::]:{}'.format(remote_port))
+        server.add_insecure_port('[::]:{}'.format(detection.remote_port))
     server.start()
     server.wait_for_termination()
 
 if __name__ == '__main__':
     logging.basicConfig()
-    global interface
     parser = argparse.ArgumentParser(description='Remote Inference from NNHAL')
     parser.add_argument('--remote_port', required=False, default=50051,
                         help='Specify port to grpc service. default: 50051')
@@ -114,4 +118,4 @@ if __name__ == '__main__':
     device = args['device']
     interface = create_interface.createInterfaceObj(adapter, device, serving_address, serving_port,
                                                     serving_model_name, dir_path)
-    serve(args['unix_socket'], args['remote_port'])
+    serve(Detection(interface, args['unix_socket'], args['remote_port']))
