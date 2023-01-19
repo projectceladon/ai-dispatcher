@@ -23,14 +23,15 @@ import sys
 import openvino.runtime as ov
 
 class OvtkInterface(BaseInterface):
-    def __init__(self, path):
+    def __init__(self, path, device):
         super().__init__()
         self.ie = ov.Core()
-        self.device = "AUTO"
+        self.device = device
         self.net = ''
         self.exec_net = ''
         self.model_loader = ModelLoader()
         self.model_loader.setModelDir(path)
+        self.infer_request = ''
 
     def load_model(self, model_xml=None):
         if not model_xml:
@@ -44,6 +45,7 @@ class OvtkInterface(BaseInterface):
         log.info("using DEVICE:"+ self.device)
         tput = {'PERFORMANCE_HINT': 'LATENCY'}
         self.exec_net = self.ie.compile_model(self.net, self.device, tput)
+        self.infer_request = self.exec_net.create_infer_request()
 
         return 30          #AVAILABLE
 
@@ -51,7 +53,6 @@ class OvtkInterface(BaseInterface):
         start_time = datetime.datetime.now()
 
         processed_data = {}
-        infer_request = self.exec_net.create_infer_request()
         for key in input_data:
             input_shape = input_data[key][1]
             img = input_data[key][0]
@@ -59,7 +60,7 @@ class OvtkInterface(BaseInterface):
             processed_data[key] = img
 
         curr_time = datetime.datetime.now()
-        res = infer_request.infer(inputs=processed_data)
+        res = self.infer_request.infer(inputs=processed_data)
         end_time = datetime.datetime.now()
         predict_time = (end_time - curr_time).total_seconds() * 1000
         #returns dictionary with keyword as nodename and values :tupple of data and their shape

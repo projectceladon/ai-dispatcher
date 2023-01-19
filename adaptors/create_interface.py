@@ -19,12 +19,12 @@ from adaptors.ovtoolkit.interface import OvtkInterface
 import sys
 
 
-def createInterfaceObj(interface_type, serving_address, serving_port,
+def createInterfaceObj(interface_type, device, serving_address, serving_port,
                        serving_model_name, dir_path):
     if(interface_type == 'ovms'):
         return OvmsInterface(serving_address, serving_port, serving_model_name, dir_path)
     elif(interface_type == 'ovtk'):
-        return OvtkInterface(dir_path)
+        return OvtkInterface(dir_path, device)
     else:
         print("Error: Interface {} is not supported".format(interface_type))
         sys.exit(1)

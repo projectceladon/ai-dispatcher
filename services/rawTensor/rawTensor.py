@@ -90,7 +90,7 @@ if __name__ == '__main__':
     parser.add_argument('--remote_port', required=False, default=50051,
                         help='Specify port to grpc service. default: 50051')
     parser.add_argument('--unix_socket', required=False, default="",
-                        help='Specify path to grpc unix socket.')
+                        help='Specify path to grpc unix socket for ovtk adaptor')
     parser.add_argument('--serving_address', required=False, default='localhost',
                         help='Specify url to inference service. default:localhost')
     parser.add_argument('--serving_port', required=False, default=9000,
@@ -102,12 +102,16 @@ if __name__ == '__main__':
     parser.add_argument('--interface', required=False, default='ovms',
                         help='Specify serving interface: currently supported interface \'ovms\'\
                          and \'ovtk\' for dynamically selecting the interface')
+    parser.add_argument('--device', required=False, default='AUTO',
+                        help='Specify device you want do inference with: currently supported devices \'CPU\'\
+                         \'GPU\' and \'GPU.{device # of GPU}\' in case of multiple GPUs for dynamically selecting device')
     args = vars(parser.parse_args(sys.argv[1:]))
     dir_path = args['serving_mounted_modelDir']
     serving_address = args['serving_address']
     serving_port = args['serving_port']
     adapter = args['interface']
     serving_model_name = args['serving_model_name']
-    interface = create_interface.createInterfaceObj(adapter, serving_address, serving_port,
+    device = args['device']
+    interface = create_interface.createInterfaceObj(adapter, device, serving_address, serving_port,
                                                     serving_model_name, dir_path)
     serve(args['unix_socket'], args['remote_port'])
