@@ -128,12 +128,17 @@ if __name__ == '__main__':
                                                     ' resized in pixels', default=1200, type=int)
     parser.add_argument('--height', required=False, help='How the input image width should be'
                                                      ' resized in pixels', default=800, type=int)
+    parser.add_argument('--device', required=False, default='AUTO',
+                        help='Specify device you want do inference with: currently supported devices \'CPU\'\
+                         \'GPU\' and \'GPU.{device # of GPU}\' in case of multiple GPUs for dynamically selecting device')
     args = vars(parser.parse_args(sys.argv[1:]))
     serving_address = args['serving_address']
     serving_port = args['serving_port']
     dir_path = args['serving_mounted_modelDir']
     serving_model_name = args['serving_model_name']
     adapter = args['interface']
-    interface = create_interface.createInterfaceObj(adapter, serving_address, serving_port,
+    device = args['device']
+    interface = create_interface.createInterfaceObj(adapter, device, serving_address, serving_port,
                                                     serving_model_name, dir_path)
+    print("Starting Service")
     serve(Detection(interface, args['remote_port'], args['height'], args['width']))
