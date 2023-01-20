@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+import os
 from concurrent import futures
 import argparse
 import logging
@@ -26,15 +27,17 @@ import math
 import facemask_detection_pb2
 import facemask_detection_pb2_grpc
 import adaptors.create_interface as create_interface
+import common.inputValidations as inputValidations
 from utils.anchor_generator import generate_anchors
 from utils.anchor_decode import decode_bbox
 from utils.nms import single_class_non_max_suppression
 
 class Detection(facemask_detection_pb2_grpc.DetectionServicer):
-    def __init__(self, interface, remote_port, img_height, img_width):
+    def __init__(self, interface, unix_socket, remote_port, img_height, img_width):
         super().__init__()
         self.remote_port = remote_port
         self.interface = interface
+        self.unix_socket = unix_socket
         self.img_height = img_height
         self.img_width = img_width
 
@@ -101,18 +104,23 @@ class Detection(facemask_detection_pb2_grpc.DetectionServicer):
 def serve(detection):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     facemask_detection_pb2_grpc.add_DetectionServicer_to_server(detection, server)
-    server.add_insecure_port('[::]:{}'.format(detection.remote_port))
+    if(detection.unix_socket != ""):
+        server.add_insecure_port("unix:" + detection.unix_socket)
+        os.chmod(detection.unix_socket, 0o666)
+    else:
+        server.add_insecure_port('[::]:{}'.format(detection.remote_port))
     server.start()
     server.wait_for_termination()
 
 if __name__ == '__main__':
     logging.basicConfig()
-    parser = argparse.ArgumentParser(description='face mask detection requests via TFS gRPC API.'
-                                                 'analyses input images and saves with with'
-                                                 'detected faces.it relies on '
+    parser = argparse.ArgumentParser(description='Face mask detection requests via TFS gRPC API.'
+                                                 'analyses input images and detects faces.It relies on '
                                                  'model face_detection...')
     parser.add_argument('--remote_port', required=False, default=50051,
                         help='Specify port to grpc service. default: 50051')
+    parser.add_argument('--unix_socket', required=False, default="",
+                        help='Specify path to grpc unix socket. default=""')
     parser.add_argument('--serving_address', required=False, default='localhost',
                         help='Specify url to inference service. default:localhost')
     parser.add_argument('--serving_mounted_modelDir', required=True,
@@ -132,6 +140,7 @@ if __name__ == '__main__':
                         help='Specify device you want do inference with: currently supported devices \'CPU\'\
                          \'GPU\' and \'GPU.{device # of GPU}\' in case of multiple GPUs for dynamically selecting device')
     args = vars(parser.parse_args(sys.argv[1:]))
+    inputValidations.validate(args)
     serving_address = args['serving_address']
     serving_port = args['serving_port']
     dir_path = args['serving_mounted_modelDir']
@@ -141,4 +150,4 @@ if __name__ == '__main__':
     interface = create_interface.createInterfaceObj(adapter, device, serving_address, serving_port,
                                                     serving_model_name, dir_path)
     print("Starting Service")
-    serve(Detection(interface, args['remote_port'], args['height'], args['width']))
+    serve(Detection(interface, args['unix_socket'], args['remote_port'], args['height'], args['width']))

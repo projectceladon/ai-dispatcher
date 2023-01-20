@@ -25,6 +25,7 @@ from concurrent import futures
 import nnhal_raw_tensor_pb2
 import nnhal_raw_tensor_pb2_grpc
 import adaptors.create_interface as create_interface
+import common.inputValidations as inputValidations
 
 
 class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
@@ -94,13 +95,13 @@ if __name__ == '__main__':
     parser.add_argument('--remote_port', required=False, default=50051,
                         help='Specify port to grpc service. default: 50051')
     parser.add_argument('--unix_socket', required=False, default="",
-                        help='Specify path to grpc unix socket for ovtk adaptor')
+                        help='Specify path to grpc unix socket. default=""')
     parser.add_argument('--serving_address', required=False, default='localhost',
                         help='Specify url to inference service. default:localhost')
-    parser.add_argument('--serving_port', required=False, default=9000,
-                        help='Specify port to inference service. default: 9000')
     parser.add_argument('--serving_mounted_modelDir', required=True,
                         help='Specify full path to mounted Directory for model loading.')
+    parser.add_argument('--serving_port', required=False, default=9000,
+                        help='Specify port to inference service. default: 9000')
     parser.add_argument('--serving_model_name', required=False, default='remote_model',
                         help='Specify model name set for inference service.')
     parser.add_argument('--interface', required=False, default='ovms',
@@ -110,6 +111,7 @@ if __name__ == '__main__':
                         help='Specify device you want do inference with: currently supported devices \'CPU\'\
                          \'GPU\' and \'GPU.{device # of GPU}\' in case of multiple GPUs for dynamically selecting device')
     args = vars(parser.parse_args(sys.argv[1:]))
+    inputValidations.validate(args)
     dir_path = args['serving_mounted_modelDir']
     serving_address = args['serving_address']
     serving_port = args['serving_port']
@@ -118,4 +120,5 @@ if __name__ == '__main__':
     device = args['device']
     interface = create_interface.createInterfaceObj(adapter, device, serving_address, serving_port,
                                                     serving_model_name, dir_path)
+    print("Starting Service")
     serve(Detection(interface, args['unix_socket'], args['remote_port']))
