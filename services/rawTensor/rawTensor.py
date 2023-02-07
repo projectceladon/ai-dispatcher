@@ -61,7 +61,10 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
             node_name = datatensor.node_name
             input_shape = datatensor.tensor_shape
             img_data = datatensor.data
-            data = np.frombuffer(img_data, np.dtype('<f')) 
+            if (len(img_data) == np.prod(input_shape)):
+                data = np.frombuffer(img_data, np.dtype('<i1'))
+            else:
+                data = np.frombuffer(img_data, np.dtype('<f'))
             input[node_name] = (data, input_shape)
 
         result = self.interface.run_detection(input)
