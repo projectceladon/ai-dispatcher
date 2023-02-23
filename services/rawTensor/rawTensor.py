@@ -31,11 +31,13 @@ import common.inputValidations as inputValidations
 
 
 class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
-    def __init__(self, interface, unix_socket, remote_port):
+    def __init__(self, interface, unix_socket, remote_port, vsock):
         super().__init__()
         self.interface = interface
         self.unix_socket = unix_socket
         self.remote_port = remote_port
+        self.vsock = vsock
+
     def prepare(self, requestStr, context):
         self.interface.prepareDir()
         return nnhal_raw_tensor_pb2.ReplyStatus(status=True)
@@ -89,7 +91,9 @@ def serve(detection):
     if(detection.unix_socket != ""):
         server.add_insecure_port("unix:" + detection.unix_socket)
         os.chmod(detection.unix_socket, 0o666)
-    else:
+    elif(detection.vsock == "true"):
+        server.add_insecure_port("vsock:-1:{}".format(detection.remote_port))
+    else :
         server.add_insecure_port('[::]:{}'.format(detection.remote_port))
     server.start()
     server.wait_for_termination()
@@ -101,6 +105,8 @@ if __name__ == '__main__':
                         help='Specify port to grpc service. default: 50051')
     parser.add_argument('--unix_socket', required=False, default="",
                         help='Specify path to grpc unix socket. default=""')
+    parser.add_argument('--vsock', required=False, default="false",
+                        help='Specify path to grpc vsock socket. default="false"')
     parser.add_argument('--serving_address', required=False, default='localhost',
                         help='Specify url to inference service. default:localhost')
     parser.add_argument('--serving_mounted_modelDir', required=True,
@@ -126,4 +132,4 @@ if __name__ == '__main__':
     interface = create_interface.createInterfaceObj(adapter, device, serving_address, serving_port,
                                                     serving_model_name, dir_path)
     print("Starting Service")
-    serve(Detection(interface, args['unix_socket'], args['remote_port']))
+    serve(Detection(interface, args['unix_socket'], args['remote_port'], args['vsock']))

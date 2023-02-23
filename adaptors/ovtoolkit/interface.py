@@ -59,7 +59,7 @@ class OvtkInterface(BaseInterface):
             input_shape = input_data[key][1]
             img = input_data[key][0]
             img = img.reshape(input_shape[0],input_shape[1], input_shape[2], input_shape[3])
-            processed_data[key] = img
+            processed_data[int(key)] = img
 
         curr_time = datetime.datetime.now()
         res = self.infer_request.infer(inputs=processed_data)
@@ -67,11 +67,9 @@ class OvtkInterface(BaseInterface):
         predict_time = (end_time - curr_time).total_seconds() * 1000
         #returns dictionary with keyword as nodename and values :tupple of data and their shape
         response = {}
-        i = 0
-        for output_key in res.keys():
-            response[output_key.get_any_name()] = (res[output_key], self.net.output(i).get_shape())
-            i = i + 1
-
+        for output_key in range(len(self.exec_net.outputs)):
+            out = self.infer_request.get_output_tensor(output_key).data
+            response[str(output_key)] = (out, list(out.shape))
         exit_time = datetime.datetime.now()
         input_time = (curr_time - start_time).total_seconds() * 1000
         output_time = (exit_time - end_time).total_seconds() * 1000
