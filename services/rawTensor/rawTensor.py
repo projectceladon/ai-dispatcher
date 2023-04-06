@@ -53,7 +53,7 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
     def getInferResult(self, request, context):
         start_time = datetime.datetime.now()
         reply_data_tensor = nnhal_raw_tensor_pb2.ReplyDataTensors()
-        if not self.interface.isModelLoaded(2000):#Wait upto 2 seconds for model load
+        if not self.interface.isModelLoaded(18000):#Wait upto 18 seconds for model load
             print("Model Load Failure")
             return reply_data_tensor
         run_start_time = datetime.datetime.now()
