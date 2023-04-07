@@ -3,5 +3,5 @@ grpcio<=1.46.2
 grpcio-tools==1.46.1
 opencv-python==4.7.0.68
 protobuf
-tensorflow
+tensorflow>=2.10
 tensorflow-serving-api
