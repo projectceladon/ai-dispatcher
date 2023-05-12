@@ -50,12 +50,37 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
         self.interface.saveBin(requestChunks)
         return nnhal_raw_tensor_pb2.ReplyStatus(status=True)
 
+    def loadModel(self, request, context):
+        #Wait upto 18 seconds for model load
+        if not self.interface.isModelLoaded(18000):
+            print("Model Load Failure")
+            return nnhal_raw_tensor_pb2.ReplyStatus(status=False)
+        return nnhal_raw_tensor_pb2.ReplyStatus(status=True)
+
+    def getMappedDatatype(self, type):
+        types = {
+            0: '<b',
+            1: '<f2',
+            2: '<f2',
+            3: '<f4',
+            4: '<f8',
+            5: '<i1',
+            6: '<i1',
+            7: '<i2',
+            8: '<i4',
+            9: '<i8',
+            10: '<u1',
+            11: '<u1',
+            12: '<u1',
+            13: '<u2',
+            14: '<u4',
+            15: '<u8',
+        }
+        return types.get(type, 'f4')
+
     def getInferResult(self, request, context):
         start_time = datetime.datetime.now()
         reply_data_tensor = nnhal_raw_tensor_pb2.ReplyDataTensors()
-        if not self.interface.isModelLoaded(18000):#Wait upto 18 seconds for model load
-            print("Model Load Failure")
-            return reply_data_tensor
         run_start_time = datetime.datetime.now()
         #decoding the grpc request and sending to adapter
         input = {}
@@ -63,10 +88,8 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
             node_name = datatensor.node_name
             input_shape = datatensor.tensor_shape
             img_data = datatensor.data
-            if (len(img_data) == np.prod(input_shape)):
-                data = np.frombuffer(img_data, np.dtype('<i1'))
-            else:
-                data = np.frombuffer(img_data, np.dtype('<f'))
+            data_type = datatensor.data_type
+            data = np.frombuffer(img_data, np.dtype(self.getMappedDatatype(data_type)))
             input[node_name] = (data, input_shape)
 
         result = self.interface.run_detection(input)
