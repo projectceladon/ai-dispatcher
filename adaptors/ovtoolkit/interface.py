@@ -25,13 +25,13 @@ import sys
 import openvino.runtime as ov
 
 class OvtkInterface(BaseInterface):
-    def __init__(self, path, device):
+    def __init__(self, model_name, path, device):
         super().__init__()
         self.ie = ov.Core()
         self.device = device
         self.net = ''
         self.exec_net = ''
-        self.model_loader = ModelLoader()
+        self.model_loader = ModelLoader(str(model_name))
         self.model_loader.setModelDir(path)
         self.infer_request = ''
 
@@ -84,11 +84,14 @@ class OvtkInterface(BaseInterface):
     def prepareDir(self):
         self.model_loader.prepareDir()
 
-    def saveXML(self, requestChunks):
-        self.model_loader.saveXML(requestChunks)
+    def cleanUp(self):
+        self.model_loader.cleanUp()
 
-    def saveBin(self, requestChunks):
-        self.model_loader.saveBin(requestChunks)
+    def saveXML(self, chunk):
+        self.model_loader.saveXML(chunk)
+
+    def saveBin(self, chunk):
+        self.model_loader.saveBin(chunk)
 
     def isModelLoaded(self, timeout_in_ms):
         return self.model_loader.isModelLoaded(self, timeout_in_ms)
