@@ -22,21 +22,22 @@ import datetime
 
 
 class ModelLoader:
-    def __init__(self):
+    def __init__(self, model_name):
         self.loaded_flag = False
         self.DIR_PATH = ''
         self.XML_PATH = ''
         self.BIN_PATH = ''
+        self.model_name = model_name
 
     def setModelDir(self, path):
         self.DIR_PATH = path
-        self.XML_PATH = self.DIR_PATH + "1/remote_model.xml"
-        self.BIN_PATH = self.DIR_PATH + "1/remote_model.bin"
+        self.XML_PATH = self.DIR_PATH + self.model_name + "/remote_model.xml"
+        self.BIN_PATH = self.DIR_PATH + self.model_name + "/remote_model.bin"
 
     def prepareDir(self):
         files = os.listdir(self.DIR_PATH)
         self.loaded_flag = False
-        full_path = self.DIR_PATH + '1'
+        full_path = self.DIR_PATH + self.model_name
         #cleaning if any previous model is loaded
         if os.path.isfile(full_path):
             os.remove(full_path)
@@ -44,27 +45,27 @@ class ModelLoader:
             shutil.rmtree(full_path)
         os.mkdir(full_path)
 
-    def saveXML(self, requestChunks):
-        start_time = datetime.datetime.now()
-        with open(self.XML_PATH, 'wb') as out_file:
-            for chunk in requestChunks:
-                print("xml chunk size {}".format(len(chunk.data)))
-                out_file.write(chunk.data)
-        end_time = datetime.datetime.now()
-        duration = (end_time - start_time).total_seconds() * 1000
-        print("saveXML time in ms {} ".format(duration))
+    def cleanUp(self):
+        self.loaded_flag = False
+        full_path = self.DIR_PATH + self.model_name
+        if os.path.isfile(full_path):
+            os.remove(full_path)
+        elif os.path.isdir(full_path):
+            shutil.rmtree(full_path)
+
+    def saveXML(self, chunk):
+        with open(self.XML_PATH, 'ab') as out_file:
+            print("xml chunk size {}".format(len(chunk.data)))
+            out_file.write(chunk.data)
+        print("saveXML for model {} ".format(self.model_name))
 
         return True
 
-    def saveBin(self, requestChunks):
-        start_time = datetime.datetime.now()
-        with open(self.BIN_PATH, 'wb') as out_file:
-            for chunk in requestChunks:
-                print("bin chunk size {}".format(len(chunk.data)))
-                out_file.write(chunk.data)
-        end_time = datetime.datetime.now()
-        duration = (end_time - start_time).total_seconds() * 1000
-        print("saveBin time in ms {} ".format(duration))
+    def saveBin(self, chunk):
+        with open(self.BIN_PATH, 'ab') as out_file:
+            print("bin chunk size {}".format(len(chunk.data)))
+            out_file.write(chunk.data)
+        print("saveBin for model {} ".format(self.model_name))
 
         return True
 

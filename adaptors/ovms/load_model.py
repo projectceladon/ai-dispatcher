@@ -49,27 +49,19 @@ class ModelLoader:
                 print("Not deleting {} ".format(full_path))
         os.mkdir(self.DIR_PATH + str(self.version_counter))
 
-    def saveXML(self, requestChunks):
-        start_time = datetime.datetime.now()
-        with open(self.XML_PATH.format(self.version_counter), 'wb') as out_file:
-            for chunk in requestChunks:
-                print("xml chunk size {}".format(len(chunk.data)))
-                out_file.write(chunk.data)
-        end_time = datetime.datetime.now()
-        duration = (end_time - start_time).total_seconds() * 1000
-        print("saveXML time in ms {} ".format(duration))
+    def saveXML(self, chunk):
+        with open(self.XML_PATH.format(self.version_counter), 'ab') as out_file:
+            print("xml chunk size {}".format(len(chunk.data)))
+            out_file.write(chunk.data)
+        print("saveXML for model {} ".format(self.version_counter))
 
         return True
 
-    def saveBin(self, requestChunks):
-        start_time = datetime.datetime.now()
-        with open(self.BIN_PATH.format(self.version_counter), 'wb') as out_file:
-            for chunk in requestChunks:
-                print("bin chunk size {}".format(len(chunk.data)))
-                out_file.write(chunk.data)
-        end_time = datetime.datetime.now()
-        duration = (end_time - start_time).total_seconds() * 1000
-        print("saveBin time in ms {} ".format(duration))
+    def saveBin(self, chunk):
+        with open(self.BIN_PATH.format(self.version_counter), 'ab') as out_file:
+            print("bin chunk size {}".format(len(chunk.data)))
+            out_file.write(chunk.data)
+        print("saveBin for model {} ".format(self.version_counter))
 
         return True
 

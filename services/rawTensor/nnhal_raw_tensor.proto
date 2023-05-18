@@ -31,15 +31,21 @@ service Detection {
   rpc sendBin (stream RequestDataChunks) returns (ReplyStatus) {}
   rpc loadModel(RequestString) returns (ReplyStatus) {}
   rpc prepare (RequestString) returns (ReplyStatus) {} //Placeholder for any future support : RequestString
+  rpc release (RequestString) returns (ReplyStatus) {}
 }
 
+
+message Token {
+  uint32 data = 1;
+}
 
 message RequestDataChunks {
   bytes data = 1;
+  Token token = 2;
 }
 
 message RequestString {
-  string value = 1;
+  Token token = 1;
 }
 message ReplyStatus {
   bool status = 1;
@@ -79,4 +85,5 @@ message ReplyDataTensors {
 // Request message containing the Input Data Tensors(blobs)
 message RequestDataTensors {
   repeated DataTensor data_tensors = 1;
+  Token token = 2;
 }
