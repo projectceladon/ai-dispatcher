@@ -79,7 +79,7 @@ class ModelLoader:
         start_time = datetime.datetime.now()
         last_print_delay = 0
         while(curr_status != AVAILABLE):
-            curr_status = interface_obj.load_model(self.XML_PATH)
+            curr_status = interface_obj.load_model(self.XML_PATH, self.model_name)
             curr_time = datetime.datetime.now()
             elapsed_time = (curr_time-start_time).total_seconds()*1000
             if((elapsed_time - last_print_delay) > 100):
