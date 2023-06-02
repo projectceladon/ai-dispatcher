@@ -99,11 +99,11 @@ class OvmsInterface(BaseInterface):
     def prepareDir(self):
         self.model_loader.prepareDir()
 
-    def saveXML(self, requestChunks):
-        self.model_loader.saveXML(requestChunks)
+    def saveXML(self, chunk):
+        self.model_loader.saveXML(chunk)
 
-    def saveBin(self, requestChunks):
-        self.model_loader.saveBin(requestChunks)
+    def saveBin(self, chunk):
+        self.model_loader.saveBin(chunk)
 
     def isModelLoaded(self, timeout_in_ms):
         return self.model_loader.isModelLoaded(self, timeout_in_ms)
