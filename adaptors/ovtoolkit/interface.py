@@ -34,6 +34,7 @@ class OvtkInterface(BaseInterface):
         self.model_loader = ModelLoader(str(model_name))
         self.model_loader.setModelDir(path)
         self.infer_request = ''
+        self.quant_model = False
 
     def load_model(self, model_xml=None, model_name=None):
         start_time = datetime.datetime.now()
@@ -45,6 +46,9 @@ class OvtkInterface(BaseInterface):
         model_bin = os.path.splitext(model_xml)[0] + ".bin"
         log.info("loading network files:\n\t{}\n\t{}".format(model_xml, model_bin))
         self.net = self.ie.read_model(model=model_xml, weights=model_bin)
+        if(self.quant_model):
+            self.device = "CPU"
+            log.warning("Forcing device for Quant: "+ self.device)
         log.info("using device: "+ self.device)
         tput = {'PERFORMANCE_HINT': 'LATENCY'}
         exec_net = ''
