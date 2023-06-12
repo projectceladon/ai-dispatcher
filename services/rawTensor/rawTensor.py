@@ -18,7 +18,7 @@
 
 import os
 import argparse
-import logging
+import logging as log
 import sys
 import grpc
 import datetime
@@ -42,6 +42,7 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
         self.interface = {}
 
     def prepare(self, requestStr, context):
+        log.info("Preparing model")
         self.interface[requestStr.token.data] = create_interface.createInterfaceObj(self.adapter, self.device, "", "",
                                                              requestStr.token.data, self.dir_path)
         self.interface[requestStr.token.data].prepareDir()
@@ -65,7 +66,7 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
     def loadModel(self, request, context):
         #Wait upto 295 seconds for model load
         if not self.interface[request.token.data].isModelLoaded(295000):
-            print("Model Load Failure")
+            log.error("Model Load Failure")
             return nnhal_raw_tensor_pb2.ReplyStatus(status=False)
         return nnhal_raw_tensor_pb2.ReplyStatus(status=True)
 
@@ -116,7 +117,7 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
             output_data_tensor.tensor_shape.extend(shape)
         end_time = datetime.datetime.now()
         duration = (end_time - start_time).total_seconds() * 1000
-        print("time in ms run_detection: {} getInferResult: {}".format(serving_duration,
+        log.debug("time in ms run_detection: {} getInferResult: {}".format(serving_duration,
                                                                             duration))
         return reply_data_tensor
 
@@ -137,7 +138,8 @@ def serve(detection):
     server.wait_for_termination()
 
 if __name__ == '__main__':
-    logging.basicConfig()
+    log.basicConfig(format='%(asctime)s %(message)s')
+    log.root.setLevel(log.INFO)
     parser = argparse.ArgumentParser(description='Remote Inference from NNHAL')
     parser.add_argument('--remote_port', required=False, default=50051,
                         help='Specify port to grpc service. default: 50051')
@@ -167,5 +169,5 @@ if __name__ == '__main__':
     adapter = args['interface']
     serving_model_name = args['serving_model_name']
     device = args['device']
-    print("Starting Service")
+    log.info("Starting Service")
     serve(Detection(adapter, device, dir_path, args['unix_socket'], args['remote_port'], args['vsock']))
