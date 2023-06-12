@@ -32,27 +32,19 @@ class ModelLoader:
 
     def setModelDir(self, path):
         self.DIR_PATH = path
-        self.XML_PATH = self.DIR_PATH + self.model_name + "/remote_model.xml"
-        self.BIN_PATH = self.DIR_PATH + self.model_name + "/remote_model.bin"
+        self.XML_PATH = self.DIR_PATH + "/remote_model_" + self.model_name + ".xml"
+        self.BIN_PATH = self.DIR_PATH + "/remote_model_" + self.model_name + ".bin"
 
     def prepareDir(self):
-        files = os.listdir(self.DIR_PATH)
-        self.loaded_flag = False
-        full_path = self.DIR_PATH + self.model_name
-        #cleaning if any previous model is loaded
-        if os.path.isfile(full_path):
-            os.remove(full_path)
-        elif os.path.isdir(full_path):
-            shutil.rmtree(full_path)
-        os.mkdir(full_path)
+        self.cleanUp()
 
     def cleanUp(self):
         self.loaded_flag = False
-        full_path = self.DIR_PATH + self.model_name
-        if os.path.isfile(full_path):
-            os.remove(full_path)
-        elif os.path.isdir(full_path):
-            shutil.rmtree(full_path)
+        #cleaning if any previous model is loaded
+        if os.path.isfile(self.XML_PATH):
+            os.remove(self.XML_PATH)
+        if os.path.isfile(self.BIN_PATH):
+            os.remove(self.BIN_PATH)
 
     def saveXML(self, chunk):
         with open(self.XML_PATH, 'ab') as out_file:
