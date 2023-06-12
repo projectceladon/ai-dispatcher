@@ -30,12 +30,13 @@ class OvtkInterface(BaseInterface):
         self.ie = ov.Core()
         self.device = device
         self.net = ''
-        self.exec_net = ''
+        self.outputs_len = 0
         self.model_loader = ModelLoader(str(model_name))
         self.model_loader.setModelDir(path)
         self.infer_request = ''
 
     def load_model(self, model_xml=None, model_name=None):
+        start_time = datetime.datetime.now()
         if not model_xml:
             log.error("Error !!! model_xml path: \'{}\' missing".format(model_xml))
             sys.exit(1)
@@ -46,9 +47,18 @@ class OvtkInterface(BaseInterface):
         self.net = self.ie.read_model(model=model_xml, weights=model_bin)
         log.info("using device: "+ self.device)
         tput = {'PERFORMANCE_HINT': 'LATENCY'}
-        self.exec_net = self.ie.compile_model(self.net, self.device, tput)
-        self.infer_request = self.exec_net.create_infer_request()
-        log.info("infer request created for model: {}".format(model_name))
+        exec_net = ''
+        try:
+            exec_net = self.ie.compile_model(self.net, self.device, tput)
+        except Exception as inst:
+            log.warning(type(inst))    # the exception instance
+            log.warning(inst)
+            log.warning("using Fallback device CPU ")
+            exec_net = self.ie.compile_model(self.net, "CPU")
+        self.infer_request = exec_net.create_infer_request()
+        self.outputs_len = len(exec_net.outputs)
+        curr_time = (datetime.datetime.now() - start_time).total_seconds()
+        log.info("Time spent in loading model {}: {}".format(model_name, curr_time))
 
         return 30          #AVAILABLE
 
@@ -71,7 +81,7 @@ class OvtkInterface(BaseInterface):
         predict_time = (end_time - curr_time).total_seconds() * 1000
         #returns dictionary with keyword as nodename and values :tupple of data and their shape
         response = {}
-        for output_key in range(self.exec_net.outputs):
+        for output_key in range(self.outputs_len):
             out = self.infer_request.get_output_tensor(output_key).data
             response[str(output_key)] = (out, list(out.shape))
         exit_time = datetime.datetime.now()

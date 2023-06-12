@@ -40,16 +40,21 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
         self.remote_port = remote_port
         self.vsock = vsock
         self.interface = {}
+        self.shared_model_file = False
+        if(serving_model_name == 'shared'):
+            self.shared_model_file = True
 
     def prepare(self, requestStr, context):
         log.info("Preparing model")
         self.interface[requestStr.token.data] = create_interface.createInterfaceObj(self.adapter, self.device, "", "",
                                                              requestStr.token.data, self.dir_path)
-        self.interface[requestStr.token.data].prepareDir()
+        if not self.shared_model_file:
+            self.interface[requestStr.token.data].prepareDir()
         return nnhal_raw_tensor_pb2.ReplyStatus(status=True)
 
     def release(self, requestStr, context):
-        self.interface[requestStr.token.data].cleanUp()
+        if not self.shared_model_file:
+            self.interface[requestStr.token.data].cleanUp()
         self.interface[requestStr.token.data] = None
         return nnhal_raw_tensor_pb2.ReplyStatus(status=True)
 
@@ -64,8 +69,8 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
         return nnhal_raw_tensor_pb2.ReplyStatus(status=True)
 
     def loadModel(self, request, context):
-        #Wait upto 295 seconds for model load
-        if not self.interface[request.token.data].isModelLoaded(295000):
+        #Wait upto 25 seconds for model load
+        if not self.interface[request.token.data].isModelLoaded(25000):
             log.error("Model Load Failure")
             return nnhal_raw_tensor_pb2.ReplyStatus(status=False)
         return nnhal_raw_tensor_pb2.ReplyStatus(status=True)
@@ -130,6 +135,7 @@ def serve(detection):
     if(detection.unix_socket != ""):
         server.add_insecure_port("unix:" + detection.unix_socket)
         os.chmod(detection.unix_socket, 0o666)
+        detection.shared_model_file = True
     elif(detection.vsock == "true"):
         server.add_insecure_port("vsock:-1:{}".format(detection.remote_port))
     else :
