@@ -71,13 +71,13 @@ class OvtkInterface(BaseInterface):
         predict_time = (end_time - curr_time).total_seconds() * 1000
         #returns dictionary with keyword as nodename and values :tupple of data and their shape
         response = {}
-        for output_key in range(len(self.exec_net.outputs)):
+        for output_key in range(self.exec_net.outputs):
             out = self.infer_request.get_output_tensor(output_key).data
             response[str(output_key)] = (out, list(out.shape))
         exit_time = datetime.datetime.now()
         input_time = (curr_time - start_time).total_seconds() * 1000
         output_time = (exit_time - end_time).total_seconds() * 1000
-        print("INPUT_Prep:{} Inference_TIME:{} OUTPUT_Prep:{}".format(input_time,
+        log.debug("INPUT_Prep:{} Inference_TIME:{} OUTPUT_Prep:{}".format(input_time,
                                                                       predict_time, output_time))
         return response
 

@@ -17,6 +17,7 @@
 #
 
 import os
+import logging as log
 import shutil
 import datetime
 
@@ -55,17 +56,17 @@ class ModelLoader:
 
     def saveXML(self, chunk):
         with open(self.XML_PATH, 'ab') as out_file:
-            print("xml chunk size {}".format(len(chunk.data)))
+            log.debug("xml chunk size {}".format(len(chunk.data)))
             out_file.write(chunk.data)
-        print("saveXML for model {} ".format(self.model_name))
+        log.info("saveXML for model {} ".format(self.model_name))
 
         return True
 
     def saveBin(self, chunk):
         with open(self.BIN_PATH, 'ab') as out_file:
-            print("bin chunk size {}".format(len(chunk.data)))
+            log.debug("bin chunk size {}".format(len(chunk.data)))
             out_file.write(chunk.data)
-        print("saveBin for model {} ".format(self.model_name))
+        log.info("saveBin for model {} ".format(self.model_name))
 
         return True
 
@@ -78,18 +79,18 @@ class ModelLoader:
             return True
 
         start_time = datetime.datetime.now()
-        last_print_delay = 0
+        print_delay = 0
         while(curr_status != AVAILABLE):
             curr_status = interface_obj.load_model(self.XML_PATH, self.model_name)
             curr_time = datetime.datetime.now()
             elapsed_time = (curr_time-start_time).total_seconds()*1000
-            if((elapsed_time - last_print_delay) > 100):
-                last_print_delay = elapsed_time
-                print("Model not loaded yet")
+            if((elapsed_time - print_delay) > 100):
+                print_delay = elapsed_time
+                log.warning("Model not loaded yet")
             if(elapsed_time > timeout_in_ms):
                 break
         if(curr_status == AVAILABLE):
-            print("Model Loaded successfully")
+            log.info("Model Loaded successfully")
             self.loaded_flag = True
             return True
 
