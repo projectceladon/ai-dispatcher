@@ -70,6 +70,7 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
 
     def loadModel(self, request, context):
         #Wait upto 25 seconds for model load
+        self.interface[request.token.data].quant_model = request.quant_type
         if not self.interface[request.token.data].isModelLoaded(25000):
             log.error("Model Load Failure")
             return nnhal_raw_tensor_pb2.ReplyStatus(status=False)
