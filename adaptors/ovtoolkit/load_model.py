@@ -20,7 +20,7 @@ import os
 import logging as log
 import shutil
 import datetime
-
+import threading
 
 class ModelLoader:
     def __init__(self, model_name):
@@ -62,28 +62,17 @@ class ModelLoader:
 
         return True
 
-    #Make sure this is called at least once
     def isModelLoaded(self, interface_obj, timeout_in_ms):
-        curr_status = 0
-        AVAILABLE = 30
         #To check if model is already loaded
         if(self.loaded_flag):
             return True
-
-        start_time = datetime.datetime.now()
-        print_delay = 0
-        while(curr_status != AVAILABLE):
-            curr_status = interface_obj.load_model(self.XML_PATH, self.model_name)
-            curr_time = datetime.datetime.now()
-            elapsed_time = (curr_time-start_time).total_seconds()*1000
-            if((elapsed_time - print_delay) > 100):
-                print_delay = elapsed_time
-                log.warning("Model not loaded yet")
-            if(elapsed_time > timeout_in_ms):
-                break
-        if(curr_status == AVAILABLE):
+        t = threading.Thread(None, interface_obj.load_model, "LoadingModel", (self.XML_PATH, self.model_name))
+        t.start()
+        t.join(timeout=(timeout_in_ms/1000))
+        if t.is_alive():
+            log.warning("Model load timed out")
+            self.loaded_flag = False
+        else:
             log.info("Model Loaded successfully")
             self.loaded_flag = True
-            return True
-
-        return False
+        return self.loaded_flag
