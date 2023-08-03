@@ -16,16 +16,13 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-from adaptors.ovms.interface import OvmsInterface
 from adaptors.ovtoolkit.interface import OvtkInterface
 import sys
 
 
 def createInterfaceObj(interface_type, device, serving_address, serving_port,
                        serving_model_name, dir_path):
-    if(interface_type == 'ovms'):
-        return OvmsInterface(serving_address, serving_port, serving_model_name, dir_path)
-    elif(interface_type == 'ovtk'):
+    if(interface_type == 'ovtk'):
         return OvtkInterface(serving_model_name, dir_path, device)
     else:
         print("Error: Interface {} is not supported".format(interface_type))
