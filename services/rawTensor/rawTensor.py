@@ -162,9 +162,9 @@ if __name__ == '__main__':
                         help='Specify port to inference service. default: 9000')
     parser.add_argument('--serving_model_name', required=False, default='remote_model',
                         help='Specify model name set for inference service.')
-    parser.add_argument('--interface', required=False, default='ovms',
-                        help='Specify serving interface: currently supported interface \'ovms\'\
-                         and \'ovtk\' for dynamically selecting the interface')
+    parser.add_argument('--interface', required=False, default='ovtk',
+                        help='Specify serving interface: currently supported interface \
+                         \'ovtk\' for dynamically selecting the interface')
     parser.add_argument('--device', required=False, default='AUTO',
                         help='Specify device you want do inference with: currently supported devices \'CPU\'\
                          \'GPU\' and \'GPU.{device # of GPU}\' in case of multiple GPUs for dynamically selecting device')
