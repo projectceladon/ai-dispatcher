@@ -66,13 +66,16 @@ class ModelLoader:
         #To check if model is already loaded
         if(self.loaded_flag):
             return True
-        t = threading.Thread(None, interface_obj.load_model, "LoadingModel", (self.XML_PATH, self.model_name))
+        result = {self.model_name:False}
+        t = threading.Thread(None, interface_obj.load_model, "LoadingModel", (self.XML_PATH, self.model_name, result))
         t.start()
         t.join(timeout=(timeout_in_ms/1000))
         if t.is_alive():
             log.warning("Model load timed out")
             self.loaded_flag = False
-        else:
+        elif result[self.model_name]:
             log.info("Model Loaded successfully")
             self.loaded_flag = True
+        else:
+            log.info("Model Load Failed")
         return self.loaded_flag

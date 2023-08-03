@@ -20,9 +20,6 @@ import os
 import ipaddress
 
 def validate(args):
-    assert os.path.exists(args['serving_mounted_modelDir']), \
-        "Invalid path provided to serving_mounted_modelDir: " \
-        + args['serving_mounted_modelDir']
     if(args['serving_address'] != "localhost"):
         ipaddress.ip_address(args['serving_address'])
     assert (1 <= int(args['serving_port']) <= 65535 ), "Invalid serving_port provided: " \
@@ -37,4 +34,8 @@ def validate(args):
     if(args['unix_socket'] != ""):
         assert os.path.exists(os.path.dirname(os.path.abspath(args['unix_socket']))), \
             "Invalid path provided to unix_socket: " + args['unix_socket']
+    else:
+        assert os.path.exists(args['serving_mounted_modelDir']), \
+            "Invalid path provided to serving_mounted_modelDir: " \
+            + args['serving_mounted_modelDir']
     print("Common Validtion Complete")

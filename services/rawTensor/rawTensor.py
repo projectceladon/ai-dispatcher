@@ -45,7 +45,7 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
             self.shared_model_file = True
 
     def prepare(self, requestStr, context):
-        log.info("Preparing model")
+        log.info("Preparing model " + str(requestStr.token.data))
         self.interface[requestStr.token.data] = create_interface.createInterfaceObj(self.adapter, self.device, "", "",
                                                              requestStr.token.data, self.dir_path)
         if not self.shared_model_file:
@@ -76,31 +76,13 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
             return nnhal_raw_tensor_pb2.ReplyStatus(status=False)
         return nnhal_raw_tensor_pb2.ReplyStatus(status=True)
 
-    def getMappedDatatype(self, type):
-        types = {
-            0: '<b',
-            1: '<f2',
-            2: '<f2',
-            3: '<f4',
-            4: '<f8',
-            5: '<i1',
-            6: '<i1',
-            7: '<i2',
-            8: '<i4',
-            9: '<i8',
-            10: '<u1',
-            11: '<u1',
-            12: '<u1',
-            13: '<u2',
-            14: '<u4',
-            15: '<u8',
-        }
-        return types.get(type, 'f4')
-
     def getInferResult(self, request, context):
         start_time = datetime.datetime.now()
         reply_data_tensor = nnhal_raw_tensor_pb2.ReplyDataTensors()
         run_start_time = datetime.datetime.now()
+        if(request.token.data not in self.interface):
+            log.error("Infer failed : Interface not prepared!!!")
+            return reply_data_tensor
         #decoding the grpc request and sending to adapter
         input = {}
         for datatensor in request.data_tensors:
@@ -108,10 +90,15 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
             input_shape = datatensor.tensor_shape
             img_data = datatensor.data
             data_type = datatensor.data_type
-            data = np.frombuffer(img_data, np.dtype(self.getMappedDatatype(data_type)))
+            data = np.frombuffer(img_data, np.dtype(getMappedDatatype(data_type)))
             input[node_name] = (data, input_shape)
 
-        result = self.interface[request.token.data].run_detection(input)
+        try:
+            result = self.interface[request.token.data].run_detection(input)
+        except Exception as inst:
+            log.warning(inst)
+            log.warning("Infer failed")
+            return reply_data_tensor
         end_time = datetime.datetime.now()
         serving_duration = (end_time - run_start_time).total_seconds() * 1000
         #Modifed according to the new interface output format
@@ -126,6 +113,27 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
         log.debug("time in ms run_detection: {} getInferResult: {}".format(serving_duration,
                                                                             duration))
         return reply_data_tensor
+
+def getMappedDatatype(type):
+    types = {
+        0: '<b',
+        1: '<f2',
+        2: '<f2',
+        3: '<f4',
+        4: '<f8',
+        5: '<i1',
+        6: '<i1',
+        7: '<i2',
+        8: '<i4',
+        9: '<i8',
+        10: '<u1',
+        11: '<u1',
+        12: '<u1',
+        13: '<u2',
+        14: '<u4',
+        15: '<u8',
+    }
+    return types.get(type, 'f4')
 
 def serve(detection):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10), options = [
@@ -156,7 +164,7 @@ if __name__ == '__main__':
                         help='Specify path to grpc vsock socket. default="false"')
     parser.add_argument('--serving_address', required=False, default='localhost',
                         help='Specify url to inference service. default:localhost')
-    parser.add_argument('--serving_mounted_modelDir', required=True,
+    parser.add_argument('--serving_mounted_modelDir', required=False,
                         help='Specify full path to mounted Directory for model loading.')
     parser.add_argument('--serving_port', required=False, default=9000,
                         help='Specify port to inference service. default: 9000')
@@ -170,11 +178,16 @@ if __name__ == '__main__':
                          \'GPU\' and \'GPU.{device # of GPU}\' in case of multiple GPUs for dynamically selecting device')
     args = vars(parser.parse_args(sys.argv[1:]))
     inputValidations.validate(args)
+    unix_socket_path = args['unix_socket']
     dir_path = args['serving_mounted_modelDir']
+    if(unix_socket_path != ""):
+        dir_path = os.path.dirname(unix_socket_path)
     serving_address = args['serving_address']
     serving_port = args['serving_port']
     adapter = args['interface']
     serving_model_name = args['serving_model_name']
     device = args['device']
     log.info("Starting Service")
-    serve(Detection(adapter, device, dir_path, args['unix_socket'], args['remote_port'], args['vsock']))
+    log.info("unix_path :" + unix_socket_path)
+    log.info("dir_path :" + dir_path)
+    serve(Detection(adapter, device, dir_path, unix_socket_path, args['remote_port'], args['vsock']))
