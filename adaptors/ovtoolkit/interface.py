@@ -57,14 +57,14 @@ class OvtkInterface(BaseInterface):
             self.device = "CPU"
             log.warning("Forcing device for Quant: "+ self.device)
         log.info("using device: "+ self.device)
-        tput = {'PERFORMANCE_HINT': 'LATENCY'}
+        tput = {'PERFORMANCE_HINT': 'LATENCY', "INFERENCE_PRECISION_HINT": "f32"}
         exec_net = ''
         try:
             exec_net = self.ie.compile_model(self.net, self.device, tput)
         except Exception as inst:
             log.warning(inst)
             log.warning("using Fallback device CPU ")
-            exec_net = self.ie.compile_model(self.net, "CPU")
+            exec_net = self.ie.compile_model(self.net, "CPU", tput)
         self.infer_request = exec_net.create_infer_request()
         self.outputs_len = len(exec_net.outputs)
         curr_time = (datetime.datetime.now() - start_time).total_seconds()
