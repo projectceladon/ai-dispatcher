@@ -49,7 +49,7 @@ class OvtkInterface(BaseInterface):
             self.net = self.ie.read_model(model=model_xml, weights=model_bin)
         except Exception as inst:
             log.warning(inst)
-            log.warning("using Fallback device CPU ")
+            log.warning("Failure to read model")
             result[model_name] = False
             return
 
@@ -57,14 +57,22 @@ class OvtkInterface(BaseInterface):
             self.device = "CPU"
             log.warning("Forcing device for Quant: "+ self.device)
         log.info("using device: "+ self.device)
-        tput = {'PERFORMANCE_HINT': 'LATENCY', "INFERENCE_PRECISION_HINT": "f32"}
+        cpu_props = {'PERFORMANCE_HINT': 'LATENCY', "INFERENCE_PRECISION_HINT": "f32"}
+        gpu_props = {'PERFORMANCE_HINT': 'LATENCY'}
         exec_net = ''
         try:
-            exec_net = self.ie.compile_model(self.net, self.device, tput)
+            if("GPU" in self.device):
+                exec_net = self.ie.compile_model(self.net, self.device, gpu_props)
+            else:
+                exec_net = self.ie.compile_model(self.net, self.device, cpu_props)
         except Exception as inst:
             log.warning(inst)
+            if("CPU" in self.device):
+                log.error("Failed to load model")
+                result[model_name] = False
+                return
             log.warning("using Fallback device CPU ")
-            exec_net = self.ie.compile_model(self.net, "CPU", tput)
+            exec_net = self.ie.compile_model(self.net, "CPU", cpu_props)
         self.infer_request = exec_net.create_infer_request()
         self.outputs_len = len(exec_net.outputs)
         curr_time = (datetime.datetime.now() - start_time).total_seconds()
