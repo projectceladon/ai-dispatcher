@@ -41,8 +41,6 @@ class Detection(nnhal_raw_tensor_pb2_grpc.DetectionServicer):
         self.vsock = vsock
         self.interface = {}
         self.shared_model_file = False
-        if(serving_model_name == 'shared'):
-            self.shared_model_file = True
 
     def prepare(self, requestStr, context):
         log.info("Preparing model " + str(requestStr.token.data))
