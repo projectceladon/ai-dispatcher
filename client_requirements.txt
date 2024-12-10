@@ -1,7 +1,7 @@
 futures==3.1.1
 grpcio==1.53.2
 grpcio-tools==1.53.0
-opencv-python==4.7.0.68
+opencv-python==4.8.1.78
 protobuf
 tensorflow>=2.10
 tensorflow-serving-api
